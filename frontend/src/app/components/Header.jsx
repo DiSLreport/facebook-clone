@@ -26,9 +26,9 @@ const Header = () => {
       <div className="mx-auto flex justify-between items-center p-2">
         <div className="flex items-center gap-2 md:gap-4">
           <Image
-            src="/images/FacebookLogo.png"  // add leading slash if in public folder
+            src="/images/FacebookLogo.png"  
             width={40}
-            height={40}                    // fixed typo here
+            height={40}                    
             alt="Facebook logo"
             onClick={()=>handleNavigation("/")}
             className="cursor-pointer"

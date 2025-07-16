@@ -30,6 +30,9 @@ const Header = () => {
             width={40}
             height={40}                    // fixed typo here
             alt="Facebook logo"
+            onClick={()=>handleNavigation("/")}
+            className="cursor-pointer"
+            
           />
           <div className='relative'>
             <form>
@@ -115,7 +118,7 @@ const Header = () => {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer">
+              <DropdownMenuItem className="cursor-pointer" onClick={()=>handleNavigation("/user-profile")}>
                 <Users />
                 <span className="ml-2">
                   Profile

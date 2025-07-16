@@ -5,13 +5,14 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+import { signInWithEmailAndPassword} from "firebase/auth"
+import { auth } from "../components/FireBase";
 
-export default function Page() {
+const Page = ()=> {
   const [tab, setTab] = useState("login");
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [signupData, setSignupData] = useState({
     firstName: "",
@@ -38,8 +39,16 @@ export default function Page() {
     setSignupData({ ...signupData, gender: value });
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
+    try{
+            alert("this is a test")
+            await signInWithEmailAndPassword(auth,email,password)
+            alert ("user logged in successfuly") //message to user
+        }
+        catch (err){
+            console.log(err) //print the error to log
+        }
     console.log("Login Data:", loginData);
   };
 
@@ -102,3 +111,5 @@ export default function Page() {
     </div>
   );
 }
+
+export default Page

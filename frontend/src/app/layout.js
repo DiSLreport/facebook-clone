@@ -1,8 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./components/providers";
-import Header from "./components/Header";
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Effi-book",
-  description: "Lonly Effi at your area",
+  description: "lonely Effi at your area",
 };
 
 export default function RootLayout({ children }) {
@@ -25,12 +23,20 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers attribute="class">
-          <Header/>
-        {children}
-        </Providers>
+        {/* {hideHeader ?(
+          {children}
 
-
+        ):( */}
+          <Providers attribute="class">
+          {children}
+          </Providers>
+        {/* ) */}
+        {/* } */}
+        {/* <Providers attribute="class">
+          {/* <LayoutWrapper> */}
+          {/* {children} */}
+          {/* </LayoutWrapper> */}
+        {/* </Providers> */}
       </body>
     </html>
   );

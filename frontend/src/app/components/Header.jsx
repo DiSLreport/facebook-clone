@@ -9,7 +9,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { useTheme } from "next-themes";
 import useSidebarStore from "@/store/sidebarStore";
 import { useRouter } from "next/navigation";
-
+import { signOut } from "firebase/auth";
+import { auth } from "./FireBase";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -19,7 +20,12 @@ const Header = () => {
   const handleNavigation = (path, item) => {
     router.push(path)
   }
-
+  const handleSignOut = async()=>{ //close firebase connection
+        await signOut(auth)
+        alert ("user signed out!")
+        handleNavigation("/user-login")
+        // move to login page with link
+    }
 
   return (
     <header className="bg-white dark:bg-[rgb(36,37,38)] text-forground shadow-md h-16 fixed top-0 left-0 right-0 z-50 p-2">
@@ -149,7 +155,9 @@ const Header = () => {
               <DropdownMenuItem className="cursor-pointer">
                 <LogOut />
                 <span className="ml-2">
-                  Log Out
+                  <button onClick={(handleSignOut)}>
+                  Log Out 
+                  </button>
                 </span>
               </DropdownMenuItem>
             </DropdownMenuContent>

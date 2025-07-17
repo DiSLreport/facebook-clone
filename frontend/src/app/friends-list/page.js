@@ -5,7 +5,7 @@ import { FriendCardSkeleton, NoFriendsMessage } from "@/lib/Skeleten";
 import FriendRequest from "./FriendRequest";
 import FriendSuggestion from "./FriendSuggestion";
 
-const page = () => {
+const FriendListPage = () => {
     const [loading, setLoading] = useState(false)
     const friendRequest = [{}]
     const friendSuggestion = [{
@@ -22,10 +22,10 @@ const page = () => {
                     ) : friendRequest.length === 0 ? (
                         <NoFriendsMessage
                             text="No friend requests"
-                            description="search for MORE firends!!"
+                            description="search for MORE friends!!"
                         />
                     ) : (
-                        friendRequest.map((friend) => (
+                        friendRequest.map((friend) => (//need unique key here
                             <FriendRequest 
                              friend={friend}
                              />
@@ -53,4 +53,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default FriendListPage;

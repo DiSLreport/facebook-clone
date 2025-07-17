@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
 import VideoCard from "./VideoCard";
 
-const page = () => {
+const VideoPage = () => {
     const videoPosts = [{
         mediaUrl: "",
         mediaType: "video",
@@ -35,4 +35,4 @@ const page = () => {
         </div>
     )
 }
-export default page
+export default VideoPage

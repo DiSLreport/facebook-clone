@@ -18,7 +18,7 @@ const HomePage = () => {
         comments: [{
             user: {
                 username: "Generic name",
-                text: "message contnet",
+                text: "message content",
             },
         }]
     },];

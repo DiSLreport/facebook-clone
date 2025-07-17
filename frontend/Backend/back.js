@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
    name:String,
    email:String,//{type:String, required:[true, "email required"], unique:true,}, //email needs to be unique, got errors when trying
    password:String,//password needs to be required, got errors when trying{type:String, required:[true,"password required"],},
-   dateOfBirth:Date,
+   dateOfBirth:String,
    gender:String
 });
 console.log("schema is done");

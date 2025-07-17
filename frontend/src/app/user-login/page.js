@@ -55,7 +55,7 @@ const UserLoginPage = ()=> {
     console.log(`this is the command ${command}, this is the data${data}`)
         try {
           console.log("inside handle command")
-            const response = await axios.post('http://localhost:5000/api/users', {
+            const response = await axios.post('http://localhost:5000/api/users', { //problem might be here
                 command,
                 data: {
                     signUpName:signupData.firstName,//+signupData.lastName, //check if this concats

@@ -4,7 +4,9 @@ import { signInWithEmailAndPassword} from "firebase/auth"
 import { useState } from "react"
 import { auth } from './FireBase'
 
-const SignIn = () => {//const and function are similar, const will work better with other consts
+const SignIn = () => {  //here to take inspiration from code, doesn't work
+    
+    //const and function are similar, const will work better with other consts
     //for simple components: doesn't matter which we choose
     //hooks, use state, use effect, useReference: better use const
     const [email,setEmail] = useState("")//"" means default empty

@@ -10,15 +10,16 @@ app.use(bodyparser.json);
 
 
 mongoose.connect('mongodb+srv://avraham91:clU22iZVqpWsDvfZ@cluster-android-2.1wuphwr.mongodb.net/?retryWrites=true&w=majority&appName=cluster-android-2');
-
+console.log("connected to mongoose");
 
 const userSchema = new mongoose.Schema({
-    firstName:String,
-   lastName:String,
-   email:{String, required:true, unique:true}, //email needs to be unique
+   name:String,
+   email:String,//{type:String, required:[true, "email required"], unique:true,}, //email needs to be unique, got errors when trying
+   password:String,//password needs to be required, got errors when trying{type:String, required:[true,"password required"],},
    dateOfBirth:Date,
    gender:String
 });
+console.log("schema is done");
 
 const User = mongoose.model('User',userSchema);
 
@@ -27,12 +28,13 @@ app.post('/api/users', async (req,res)=>{ //req: data from client res: what we s
     try{
         switch(command){
             case 'insert':
-                const newUser = ({name:data.name, email:data.email})//input validation should be here...
-                await newUser.save() //save to database
-                return res.json({message:'user insert successful',user:newUser})
+                const newUser = ({name:data.signUpName, email:data.signUpEmail,password:data.signUpPassword,dateOfBirth:data.signUpDateOfBirth,gender:data.signUpGender});//input validation should be here...
+                console.log(newUser);
+                await newUser.save(); //save to database
+                return res.json({message:'user insert successful',user:newUser});
             case 'select':
-                const users = await user.find({})
-                return res.json({message: users='get your users', users})
+                const users = await User.find({});
+                return res.json({message: users='get your users', users});
             case 'update':
                 const updatedUser = await User.findByIdAndUpdate( //retrieve info about user
                     data.userId,
@@ -40,7 +42,7 @@ app.post('/api/users', async (req,res)=>{ //req: data from client res: what we s
                     { new:true }
                     );
             if (!updatedUser){
-                return res.status(404).json({ message:'user not found' })
+                return res.status(404).json({ message:'user not found' });
             }
             return res.json({ message:'user updated',user: updatedUser });
             

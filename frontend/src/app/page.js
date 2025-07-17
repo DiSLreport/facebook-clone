@@ -31,7 +31,7 @@ export default function Home() {
             {user ? (
                 <div>
                     {console.log(`user is connected ${user}`)}
-                    <h1>hello</h1>
+                    {/* <h1>hello</h1> */}
                     {handleNavigation("/Homepage")}
                     {/* <HomePage></HomePage> */}
                 </div>

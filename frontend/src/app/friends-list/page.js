@@ -22,10 +22,10 @@ const FriendListPage = () => {
                     ) : friendRequest.length === 0 ? (
                         <NoFriendsMessage
                             text="No friend requests"
-                            description="search for MORE firends!!"
+                            description="search for MORE friends!!"
                         />
                     ) : (
-                        friendRequest.map((friend) => (
+                        friendRequest.map((friend) => (//need unique key here
                             <FriendRequest 
                              friend={friend}
                              />

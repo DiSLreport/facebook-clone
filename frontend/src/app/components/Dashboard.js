@@ -6,7 +6,7 @@ import SignIn from "./SignIn"
 import SignUp from "./SignUp"
 import { auth } from "./FireBase"
 
-function Dashboard(props){
+function Dashboard(props){  //here to take inspiration from code, doesn't work
     const [user,setUser] = useState("") //user variable
     useEffect(()=>{//Listen to changes on user: if the user changes, set it to be the current user
         const unsub = onAuthStateChanged(auth,(currentUser)=>{

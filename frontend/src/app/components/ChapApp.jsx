@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const socket = io('http://localhost:3001');
 
-function ChatApp() {
+function ChatApp() { //here to take inspiration from code, doesn't work
     const [username, setusername] = useState([]);
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');

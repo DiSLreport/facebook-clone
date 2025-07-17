@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -9,14 +10,19 @@ import { signInWithEmailAndPassword} from "firebase/auth"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/FireBase";
 import { useRouter } from "next/navigation";
+
 const UserLoginPage = ()=> {
   const router = useRouter()
     const handleNavigation = (path, item) => {
       router.push(path)
     }
   const [tab, setTab] = useState("login");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); //toggle password visibility
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); //toggle password visibility
+  const [users,setUsers] = useState([])
+  const [userId,setUserId] = useState('')
+  const [message, setMessage] = useState('');
+  const [newEmail, setNewEmail] = useState('');
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [signupData, setSignupData] = useState({
     firstName: "",
@@ -27,6 +33,76 @@ const UserLoginPage = ()=> {
     dateOfBirth: "",
     gender: "",
   });
+
+  useEffect(()=>{
+    fetchUsers();
+  },[]);
+
+  const fetchUsers = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/users', {
+                command: 'select',
+                data: {}
+            });
+            setUsers(response.data.users || []);
+        } catch (error) {
+            console.error(error);
+            setMessage('Error fetching users: ' + (error.response?.data?.message || error.message));
+        }
+    };
+
+  const handleCommand = async (command, data = {}) => {
+    console.log(`this is the command ${command}, this is the data${data}`)
+        try {
+          console.log("inside handle command")
+            const response = await axios.post('http://localhost:5000/api/users', {
+                command,
+                data: {
+                    signUpName:signupData.firstName,//+signupData.lastName, //check if this concats
+                    signUpEmail:signupData.email,
+                    signUpPassword:signupData.password,
+                    signUpDateOfBirth:signupData.dateOfBirth,
+                    signUpGender:signupData.gender,
+                    logInEmail:loginData.email,
+                    logInPassword:loginData.password,
+                    userId,
+                    newEmail,
+                    ...data
+                }
+            });
+
+            setMessage(response.data.message || 'Operation completed successfully.');
+            fetchUsers();
+        } catch (error) {
+            console.error(error);
+            setMessage('Error: ' + (error.response?.data?.message || error.message));
+        }
+    };
+
+    // const handleEdit = (user) => {
+    //     setUserId(user._id);
+    //     setName(user.name);
+    //     setEmail(user.email);
+    //     setNewEmail('');
+    //     setMessage(`Editing user: ${user.name}`);
+    // };
+
+    // const confirmDelete = (id) => {
+    //     setConfirmDeleteId(id);
+    // };
+
+    // const performDelete = () => {
+    //     if (confirmDeleteId) {
+    //         handleCommand('delete', { userId: confirmDeleteId });
+    //         setConfirmDeleteId(null);
+    //     }
+    // };
+
+    // const cancelDelete = () => {
+    //     setConfirmDeleteId(null);
+    // };
+    
+
 
   const toggleShowPassword = () => setShowPassword(prev => !prev);
   const toggleShowConfirmPassword = () => setShowConfirmPassword(prev => !prev);
@@ -46,11 +122,10 @@ const UserLoginPage = ()=> {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try{
-            alert("this is a test")
-            console.log("hello")
-            console.log(`email is: ${loginData.email}, password is: ${loginData.password}`)
+            // console.log(`email is: ${loginData.email}, password is: ${loginData.password}`)
             await signInWithEmailAndPassword(auth,loginData.email,loginData.password)
             alert ("user logged in successfuly") //message to user
+            
             handleNavigation("/Homepage")
         }
         catch (err){
@@ -68,6 +143,8 @@ const UserLoginPage = ()=> {
     else try{
             await createUserWithEmailAndPassword(auth,signupData.email, signupData.password)
             alert ("user registered successfuly") //message to user
+            handleCommand('insert')
+            console.log("checking if handle command works- after handle command")
         }
         catch (err){
             console.log(err) //print the error to log

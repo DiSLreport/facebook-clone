@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 export default function Home() {
     
     const router = useRouter()
+      const handleNavigation = (path, item) => {
+        router.push(path)
+      }
   const [user,setUser] = useState("") //user variable
       useEffect(()=>{//Listen to changes on user: if the user changes, set it to be the current user
         const unsub = onAuthStateChanged(auth,(currentUser)=>{
@@ -29,10 +32,8 @@ export default function Home() {
                 <div>
                     {console.log(`user is connected ${user}`)}
                     <h1>hello</h1>
-                    {/* <h2> welcome {user.email} </h2>    
-                    <button onClick={handleSignOut}>Sign Out</button> */}
-                    {/* {router.push()} */}
-                    <HomePage></HomePage>
+                    {handleNavigation("/Homepage")}
+                    {/* <HomePage></HomePage> */}
                 </div>
             ) : (
             <div>
@@ -40,7 +41,8 @@ export default function Home() {
                 {/* <h2> Sign in or Sign up</h2> */}
                 {/* <{<SignIn/>
                 <SignUp/>}> */}
-                <Page></Page>
+                {handleNavigation("/user-login")}
+                {/* <Page></Page> */}
             </div>
             )}      
         </div>

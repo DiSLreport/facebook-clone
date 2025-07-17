@@ -8,8 +8,12 @@ import SignupForm from "./SignupForm";
 import { signInWithEmailAndPassword} from "firebase/auth"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/FireBase";
-
+import { useRouter } from "next/navigation";
 const UserLoginPage = ()=> {
+  const router = useRouter()
+    const handleNavigation = (path, item) => {
+      router.push(path)
+    }
   const [tab, setTab] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -47,6 +51,7 @@ const UserLoginPage = ()=> {
             console.log(`email is: ${loginData.email}, password is: ${loginData.password}`)
             await signInWithEmailAndPassword(auth,loginData.email,loginData.password)
             alert ("user logged in successfuly") //message to user
+            handleNavigation("/Homepage")
         }
         catch (err){
             console.log(err) //print the error to log

@@ -6,11 +6,11 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import { signInWithEmailAndPassword} from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/FireBase";
 
-const Page = ()=> {
+const UserLoginPage = ()=> {
   const [tab, setTab] = useState("login");
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -43,7 +43,9 @@ const Page = ()=> {
     e.preventDefault();
     try{
             alert("this is a test")
-            await signInWithEmailAndPassword(auth,email,password)
+            console.log("hello")
+            console.log(`email is: ${loginData.email}, password is: ${loginData.password}`)
+            await signInWithEmailAndPassword(auth,loginData.email,loginData.password)
             alert ("user logged in successfuly") //message to user
         }
         catch (err){
@@ -52,12 +54,19 @@ const Page = ()=> {
     console.log("Login Data:", loginData);
   };
 
-  const handleSignupSubmit = (e) => {
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
     if (signupData.password !== signupData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
+    else try{
+            await createUserWithEmailAndPassword(auth,signupData.email, signupData.password)
+            alert ("user registered successfuly") //message to user
+        }
+        catch (err){
+            console.log(err) //print the error to log
+        }
     console.log("Signup Data:", signupData);
   };
 
@@ -112,4 +121,4 @@ const Page = ()=> {
   );
 }
 
-export default Page
+export default UserLoginPage

@@ -11,9 +11,13 @@ app.use(bodyparser.json);
 
 mongoose.connect('mongodb+srv://avraham91:clU22iZVqpWsDvfZ@cluster-android-2.1wuphwr.mongodb.net/?retryWrites=true&w=majority&appName=cluster-android-2');
 
+
 const userSchema = new mongoose.Schema({
-   name:String,
-   email:String
+    firstName:String,
+   lastName:String,
+   email:{String, required:true, unique:true}, //email needs to be unique
+   dateOfBirth:Date,
+   gender:String
 });
 
 const User = mongoose.model('User',userSchema);

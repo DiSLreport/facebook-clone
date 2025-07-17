@@ -5,7 +5,7 @@ import { FriendCardSkeleton, NoFriendsMessage } from "@/lib/Skeleten";
 import FriendRequest from "./FriendRequest";
 import FriendSuggestion from "./FriendSuggestion";
 
-const page = () => {
+const FriendListPage = () => {
     const [loading, setLoading] = useState(false)
     const friendRequest = [{}]
     const friendSuggestion = [{
@@ -53,4 +53,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default FriendListPage;

@@ -4,9 +4,11 @@ import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "./components/FireBase"
 import Page from "./user-login/page";
 import { useState,useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  
+    
+    const router = useRouter()
   const [user,setUser] = useState("") //user variable
       useEffect(()=>{//Listen to changes on user: if the user changes, set it to be the current user
         const unsub = onAuthStateChanged(auth,(currentUser)=>{
@@ -25,12 +27,16 @@ export default function Home() {
         <div>
             {user ? (
                 <div>
+                    {console.log(`user is connected ${user}`)}
+                    <h1>hello</h1>
                     {/* <h2> welcome {user.email} </h2>    
                     <button onClick={handleSignOut}>Sign Out</button> */}
-                    <Home></Home>
+                    {/* {router.push()} */}
+                    <HomePage></HomePage>
                 </div>
             ) : (
             <div>
+                {console.log(`user is not connected ${user}`)}
                 {/* <h2> Sign in or Sign up</h2> */}
                 {/* <{<SignIn/>
                 <SignUp/>}> */}

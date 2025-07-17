@@ -2,7 +2,7 @@ import React from "react";
 import ProfileTabs from "./ProfileTabs";
 import ProfileHeader from "./ProfileHeader";
 
-const page = () => {
+const UserProfilePage = () => {
     return (
         <div>
             {<ProfileHeader />}
@@ -11,4 +11,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default UserProfilePage;

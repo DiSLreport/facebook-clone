@@ -58,7 +58,7 @@ const UserLoginPage = ()=> {
             const response = await axios.post('http://localhost:5000/api/users', { //problem might be here
                 command,
                 data: {
-                    signUpName:signupData.firstName,//+signupData.lastName, //check if this concats
+                    signUpName:signupData.firstName+" " +signupData.lastName, //check if this concats
                     signUpEmail:signupData.email,
                     signUpPassword:signupData.password,
                     signUpDateOfBirth:signupData.dateOfBirth,

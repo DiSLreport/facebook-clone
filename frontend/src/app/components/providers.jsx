@@ -20,6 +20,7 @@ const hideHeader = pathname === '/user-login';
     <div>
       {hideHeader?(
         <ThemeProvider attribute="class">
+        <Header/>
         {children}
         </ThemeProvider>
       )

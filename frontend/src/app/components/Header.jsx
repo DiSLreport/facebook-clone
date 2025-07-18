@@ -11,6 +11,7 @@ import useSidebarStore from "@/store/sidebarStore";
 import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "./FireBase";
+import AvatarFacebook from "@/components/ui/avatar-facebook";
 
 const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false)
@@ -55,10 +56,7 @@ const Header = () => {
                     <div className="flex item-center space-x-8 p-2 hover:bg-gray-100 dark:hover:bg-gary-700 rounded cursor-pointer">
                       <Search className='absolute text-sm text-gray-400' />
                       <div className="flex items-center gap-2">
-                        <Avatar>
-                          <AvatarImage />
-                          <AvatarFallback>D</AvatarFallback>
-                        </Avatar>
+                        <AvatarFacebook/>
                         <span>
                           Generic Name
                         </span>
@@ -102,20 +100,14 @@ const Header = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="relative h-8 w-8 rounded-full" variant="ghost">
-                <Avatar>
-                  <AvatarImage />
-                  <AvatarFallback className="dark:bg-gray-400">D</AvatarFallback>
-                </Avatar>
+                <AvatarFacebook/>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-64 z-50" align="end">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                   <div className="flex items-center">
-                    <Avatar className="h-8 w-8 me-2">
-                      <AvatarImage />
-                      <AvatarFallback className="dark:bg-gray-400">D</AvatarFallback>
-                    </Avatar>
+                    <AvatarFacebook/>
                     <div className="">
                       <p className="text-sm font-medium leadin-none"> Generic Name</p>
                       <p className="text-xs mt-2 text-gray-600 leadin-none"> Email@ of user.com</p>

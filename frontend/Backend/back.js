@@ -6,16 +6,17 @@ const bodyparser = require('body-parser');
 
 const app = express();
 app.use(cors());
-app.use(bodyparser.json);
+app.use(bodyparser.json());
 
 
-mongoose.connect('mongodb+srv://avraham91:clU22iZVqpWsDvfZ@cluster-android-2.1wuphwr.mongodb.net/?retryWrites=true&w=majority&appName=cluster-android-2');
-console.log("connected to mongoose");
+mongoose.connect('mongodb+srv://avraham91:clU22iZVqpWsDvfZ@cluster-android-2.1wuphwr.mongodb.net/?retryWrites=true&w=majority&appName=cluster-android-2')
+.then(()=>console.log("connected to MongoDB"))
+.catch(err=>console.error("MongoDB connection error:",err));
 
 const userSchema = new mongoose.Schema({
    name:String,
-   email:String,//{type:String, required:[true, "email required"], unique:true,}, //email needs to be unique, got errors when trying
-   password:String,//password needs to be required, got errors when trying{type:String, required:[true,"password required"],},
+   email:{type:String, required:[true, "email required"], unique:true},//String,//{type:String, required:[true, "email required"], unique:true,}, //email needs to be unique, got errors when trying
+   password:{type:String, required:[true,"password required"]},//String,//password needs to be required, got errors when trying{type:String, required:[true,"password required"],},
    dateOfBirth:String,
    gender:String
 });
@@ -28,13 +29,17 @@ app.post('/api/users', async (req,res)=>{ //req: data from client res: what we s
     try{
         switch(command){
             case 'insert':
-                const newUser = ({name:data.signUpName, email:data.signUpEmail,password:data.signUpPassword,dateOfBirth:data.signUpDateOfBirth,gender:data.signUpGender});//input validation should be here...
-                console.log(newUser);
+                const newUser = new User({
+                    name:data.signUpName, 
+                    email:data.signUpEmail,
+                    password:data.signUpPassword,
+                    dateOfBirth:data.signUpDateOfBirth,
+                    gender:data.signUpGender});//input validation should be here...
                 await newUser.save(); //save to database
                 return res.json({message:'user insert successful',user:newUser});
             case 'select':
                 const users = await User.find({});
-                return res.json({message: users='get your users', users});
+                return res.json({message: 'get your users', users});
             case 'update':
                 const updatedUser = await User.findByIdAndUpdate( //retrieve info about user
                     data.userId,

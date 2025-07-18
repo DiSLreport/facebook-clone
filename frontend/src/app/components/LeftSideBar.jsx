@@ -1,4 +1,5 @@
 "use client"
+import AvatarFacebook from "@/components/ui/avatar-facebook"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
@@ -23,10 +24,7 @@ const LeftSideBar = () => {
                 {/*navagation menu*/}
                 <nav className="space-y-4 flex-grow">
                     <div className="flex items-center space-x-2 cursor-pointer">
-                        <Avatar className="h-10 w-10 ">
-                            <AvatarImage />
-                            <AvatarFallback>D</AvatarFallback>
-                        </Avatar>
+                        <AvatarFacebook/>
                         <span className="font-semibold">
                             Generic Name
                         </span>

@@ -65,10 +65,7 @@ const LeftSideBar = () => {
                 <div className="mb-16">
                     <Separator className="my-4" />
                     <div className="flex items-center space-x-2 mb-4 cursor-pointer">
-                        <Avatar className="h-10 w-10 ">
-                            <AvatarImage />
-                            <AvatarFallback>D</AvatarFallback>
-                        </Avatar>
+                        <AvatarFacebook/>
                         <span className="font-semibold">
                             Generic Name
                         </span>

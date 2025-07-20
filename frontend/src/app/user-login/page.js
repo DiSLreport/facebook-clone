@@ -58,7 +58,7 @@ const UserLoginPage = ()=> {
             const response = await axios.post('http://localhost:5000/api/users', { //problem might be here
                 command,
                 data: {
-                    signUpName:signupData.firstName+" " +signupData.lastName, //check if this concats
+                    signUpName:signupData.firstName+" " +signupData.lastName, 
                     signUpEmail:signupData.email,
                     signUpPassword:signupData.password,
                     signUpDateOfBirth:signupData.dateOfBirth,
@@ -144,7 +144,8 @@ const UserLoginPage = ()=> {
             await createUserWithEmailAndPassword(auth,signupData.email, signupData.password)
             alert ("user registered successfuly") //message to user
             handleCommand('insert')
-            console.log("checking if handle command works- after handle command")
+            useRef
+            handleNavigation("/Homepage")
         }
         catch (err){
             console.log(err) //print the error to log

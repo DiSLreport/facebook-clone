@@ -13,13 +13,13 @@ function ChatApp() { //here to take inspiration from code, doesn't work
     const endRef = useRef(null);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/messages')
+        axios.get('http://localhost:3001/messages') //axios is same idea as ajax/fetch, works with api and jsons
             .then(res => setMessages(res.data))
             .catch(console.error);
     }, []);
 
     useEffect(() => {
-        socket.on('chat message', msg => {
+        socket.on('chat message', msg => { //socket is an open continuous pipe, more efficient than 
             setMessages(prev => [...prev, msg]);
         });
         return () => socket.off('chat message');

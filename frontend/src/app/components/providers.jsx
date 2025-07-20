@@ -11,26 +11,38 @@ export default function Providers({ children }) {
     setMounted(true)
   }, [])
 
+  const pathname = usePathname();
+  const hideHeader = pathname === '/user-login';
   if (!mounted) return null // Prevent hydration mismatch
-const pathname = usePathname();
-const hideHeader = pathname === '/user-login';
+
 
 
   return (
+    
     <div>
-      {hideHeader?(
-        <ThemeProvider attribute="class">
-        <Header/>
+      <ThemeProvider attribue="class">
+        {!hideHeader && <Header></Header>}
         {children}
-        </ThemeProvider>
-      )
-        :(
-          <ThemeProvider attribute="class">
-          <Header/>
-          {children}
-          </ThemeProvider>
-        )
-        }
-        </div>
+      </ThemeProvider>
+
+    </div>
+    
+
+    //first option of conditional render:
+    // <div>
+    //   {hideHeader?(
+    //     <ThemeProvider attribute="class">
+    //     {/* <Header/> */}
+    //     {children}
+    //     </ThemeProvider>
+    //   )
+    //     :(
+    //       <ThemeProvider attribute="class">
+    //       <Header/>
+    //       {children}
+    //       </ThemeProvider>
+    //     )
+    //     }
+    //     </div>
         );
 }

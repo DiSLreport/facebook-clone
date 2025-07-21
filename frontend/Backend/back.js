@@ -40,6 +40,12 @@ app.post('/api/users', async (req,res)=>{ //req: data from client res: what we s
             case 'select':
                 const users = await User.find({});
                 return res.json({message: 'get your users', users});
+            case 'selectById':
+                const userById = await User.findById(data.userId);
+                return res.json({message: 'get your user by id', user:userById});
+            case 'selectByEmail':
+                const userByEmail = await User.findOne({email: {$eq: data.logInEmail}});
+                return res.json({message: 'get your user by email', user:userByEmail});
             case 'update':
                 const updatedUser = await User.findByIdAndUpdate( //retrieve info about user
                     data.userId,

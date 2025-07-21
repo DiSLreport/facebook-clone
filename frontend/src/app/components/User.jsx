@@ -1,30 +1,47 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useRef } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
-import { signInWithEmailAndPassword} from "firebase/auth"
-import { createUserWithEmailAndPassword } from "firebase/auth";
+// import LoginForm from "../user-login/LoginForm";
+// import SignupForm from "./SignupForm";
+// import { signInWithEmailAndPassword} from "firebase/auth"
+// import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/FireBase";
 import { useRouter } from "next/navigation";
 
-export const userRef = { current: null };
+
+// export const userRef = { current: null };
+    // if(userRef){
+    //     export const userRef
+    // }
+    // export const modifyUserRef = (modifiedUserRef) =>{
+    //     userRef.current = modifiedUserRef;
+    // }
+
 
 function User(){
-    const [tab, setTab] = useState("login");
-  const [showPassword, setShowPassword] = useState(false); //toggle password visibility
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); //toggle password visibility
+
+    // const [tab, setTab] = useState("login");
+    //   const [showPassword, setShowPassword] = useState(false); //toggle password visibility
+    //   const [showConfirmPassword, setShowConfirmPassword] = useState(false); //toggle password visibility
+   const userRef = useRef(null);
   const [users,setUsers] = useState([])
   const [userId,setUserId] = useState('')
-  const [message, setMessage] = useState('');
-  const [newEmail, setNewEmail] = useState('');
+    //   const [message, setMessage] = useState('');
+    //   const [newEmail, setNewEmail] = useState('');
+  useEffect(()=>{
+    userRef.current = null;
+  },[]);
   
+  const modifyUserRef = (modifiedUserRef)=>{
+    userRef.current = modifiedUserRef
+  }
   useEffect(()=>{
       fetchUsers();
     },[]);
   
+    
     const fetchUsers = async () => {
         try {
             const response = await axios.post('http://localhost:5000/api/users', {
@@ -43,10 +60,10 @@ const handleCommand = async (command, data = {}) => {
     console.log(`this is the command ${command}, this is the data${data}`)
         try {
           console.log("inside handle command")
-            const response = await axios.post('http://localhost:5000/api/users', { //problem might be here
+            const response = await axios.post('http://localhost:5000/api/users', {
                 command,
                 data: {
-                    signUpName:signupData.firstName+" " +signupData.lastName, 
+                    signUpName:signupData.firstName+ " " +signupData.lastName, 
                     signUpEmail:signupData.email,
                     signUpPassword:signupData.password,
                     signUpDateOfBirth:signupData.dateOfBirth,
@@ -89,7 +106,11 @@ const handleEdit = (user) => {
     const cancelDelete = () => {
         setConfirmDeleteId(null);
     };
-
+return(
+    <div>
+        
+    </div>
+)
 }
 
     export default User;

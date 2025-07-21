@@ -10,6 +10,8 @@ import { signInWithEmailAndPassword} from "firebase/auth"
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/FireBase";
 import { useRouter } from "next/navigation";
+import { User } from "lucide-react";
+// import { userRef,modifyUserRef } from "../components/User";
 
 const UserLoginPage = ()=> {
   const router = useRouter()
@@ -59,11 +61,11 @@ const UserLoginPage = ()=> {
                 command,
                 data: {
                     signUpName:signupData.firstName+" " +signupData.lastName, 
-                    signUpEmail:signupData.email,
+                    signUpEmail:signupData.email.toLowerCase(),
                     signUpPassword:signupData.password,
                     signUpDateOfBirth:signupData.dateOfBirth,
                     signUpGender:signupData.gender,
-                    logInEmail:loginData.email,
+                    logInEmail:loginData.email.toLowerCase(),
                     logInPassword:loginData.password,
                     userId,
                     newEmail,
@@ -73,6 +75,12 @@ const UserLoginPage = ()=> {
 
             setMessage(response.data.message || 'Operation completed successfully.');
             fetchUsers();
+            console.log(`response user id is ${response.data.user._id}`);
+            console.log(`response user is ${response.data.user}`);
+            // console.log(`user ref id is:${User.userRef.current}`);
+            // User.modifyUserRef(response.data.user._id);
+            // console.log(`user ref new id is:${User.userRef.current}`);
+
         } catch (error) {
             console.error(error);
             setMessage('Error: ' + (error.response?.data?.message || error.message));
@@ -125,7 +133,9 @@ const UserLoginPage = ()=> {
             // console.log(`email is: ${loginData.email}, password is: ${loginData.password}`)
             await signInWithEmailAndPassword(auth,loginData.email,loginData.password)
             alert ("user logged in successfuly") //message to user
-            
+            //insert mongo stuff
+            handleCommand('selectByEmail')
+            // console.log(userRef)
             handleNavigation("/Homepage")
         }
         catch (err){
@@ -144,7 +154,6 @@ const UserLoginPage = ()=> {
             await createUserWithEmailAndPassword(auth,signupData.email, signupData.password)
             alert ("user registered successfuly") //message to user
             handleCommand('insert')
-            useRef
             handleNavigation("/Homepage")
         }
         catch (err){
@@ -155,6 +164,7 @@ const UserLoginPage = ()=> {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center p-4">
+      <User></User>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

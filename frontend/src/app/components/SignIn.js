@@ -4,13 +4,14 @@ import { signInWithEmailAndPassword} from "firebase/auth"
 import { useState } from "react"
 import { auth } from './FireBase'
 
-const SignIn = () => {  //here to take inspiration from code, doesn't work
+const SignIn = ({email, password}) => {  //here to take inspiration from code, doesn't work
     
     //const and function are similar, const will work better with other consts
     //for simple components: doesn't matter which we choose
     //hooks, use state, use effect, useReference: better use const
-    const [email,setEmail] = useState("")//"" means default empty
-    const [password,setPassword] = useState("")
+    // const [email,setEmail] = useState("")//"" means default empty
+    // const [password,setPassword] = useState("")
+    
     const handleSignIn = async (e) => {//async to not get stuck while waiting
         e.preventDefault()//preventDefault means: don't go to server [to not reset inputs]
         try{
@@ -23,7 +24,7 @@ const SignIn = () => {  //here to take inspiration from code, doesn't work
     }
     return(
     <div>
-        <h2> sign in </h2>
+        {/* <h2> sign in </h2>
         <form onSubmit={handleSignIn}>
             <Link href="/">Home</Link>
             <input
@@ -32,13 +33,14 @@ const SignIn = () => {  //here to take inspiration from code, doesn't work
             value={email}
             onChange={(e)=> setEmail(e.target.value)}/>
             {/* //e is an event, has a lot inside it, target.value is what we care about */}
-            <input
+            {/* <input
             type="password"
             placeholder="enter your password"
             value={password}
             onChange={(e)=> setPassword(e.target.value)}/>
             <button type="submit">Sign In</button>
-        </form>
+        {/* </form> */}
+        
     </div>
     )
 }

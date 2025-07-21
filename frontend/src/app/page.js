@@ -6,6 +6,7 @@ import Page from "./user-login/page";
 import { useState,useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import User, { userRef } from "./components/User";
 
 export default function Home() {
     const userRef = useRef();
@@ -36,16 +37,18 @@ export default function Home() {
 
   return (
         <div>
-            {user ? (
+            <User></User>
+            {console.log(userRef.current)}
+            {userRef.current ? (
                 <div>
-                    {console.log(`user is connected ${user}`)}
+                    {console.log(`user is connected ${userRef.current}`)}
                     {/* <h1>hello</h1> */}
                     {handleNavigation("/Homepage")}
                     {/* <HomePage></HomePage> */}
                 </div>
             ) : (
             <div>
-                {console.log(`user is not connected ${user}`)}
+                {console.log(`user is not connected ${userRef.current}`)}
                 {/* <h2> Sign in or Sign up</h2> */}
                 {/* <{<SignIn/>
                 <SignUp/>}> */}

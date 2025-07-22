@@ -11,6 +11,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/FireBase";
 import { useRouter } from "next/navigation";
 import { User } from "lucide-react";
+import Providers from "../components/providers";
 // import { userRef,modifyUserRef } from "../components/User";
 
 const UserLoginPage = ()=> {
@@ -39,7 +40,7 @@ const UserLoginPage = ()=> {
   useEffect(()=>{
     fetchUsers();
   },[]);
-
+  
   const fetchUsers = async () => {
         try {
             const response = await axios.post('http://localhost:5000/api/users', {

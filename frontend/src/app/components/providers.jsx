@@ -1,7 +1,7 @@
 "use client"
 import { usePathname } from 'next/navigation'
 import { ThemeProvider } from 'next-themes'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef} from 'react'
 import Header from './Header'
 
 export default function Providers({ children }) {
@@ -10,6 +10,18 @@ export default function Providers({ children }) {
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(()=>
+  {
+    const userRef = useRef("null");
+
+  },[])
+  
+  const modifyUserRef = (modifiedUserRef)=>{
+    userRef.current = modifiedUserRef
+  }
+
+  console.log(`inside providers, user ref is ${userRef}`);
 
   const pathname = usePathname();
   const hideHeader = pathname === '/user-login';

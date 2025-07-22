@@ -9,7 +9,7 @@ app.use(cors());
 app.use(bodyparser.json());
 
 
-mongoose.connect('mongodb+srv://avraham91:clU22iZVqpWsDvfZ@cluster-android-2.1wuphwr.mongodb.net/?retryWrites=true&w=majority&appName=cluster-android-2')
+mongoose.connect('mongodb+srv://avraham91:clU22iZVqpWsDvfZ@cluster-android-2.1wuphwr.mongodb.net/?retryWrites=true&w=majority&appName=cluster-android-2') //better have ENV files to keep these secret...
 .then(()=>console.log("connected to MongoDB"))
 .catch(err=>console.error("MongoDB connection error:",err));
 

@@ -25,18 +25,20 @@ function User(){
     // const [tab, setTab] = useState("login");
     //   const [showPassword, setShowPassword] = useState(false); //toggle password visibility
     //   const [showConfirmPassword, setShowConfirmPassword] = useState(false); //toggle password visibility
-   const userRef = useRef(null);
+//    const userComponentRef = useRef(null);
   const [users,setUsers] = useState([])
   const [userId,setUserId] = useState('')
     //   const [message, setMessage] = useState('');
     //   const [newEmail, setNewEmail] = useState('');
-  useEffect(()=>{
-    userRef.current = null;
+  
+    useEffect(()=>{
+    const userComponentRef= useRef(null);
   },[]);
   
-  const modifyUserRef = (modifiedUserRef)=>{
-    userRef.current = modifiedUserRef
+  const modifyUserComponentRef = (modifiedUserComponentRef)=>{
+    userComponentRef.current = modifiedUserComponentRef
   }
+  
   useEffect(()=>{
       fetchUsers();
     },[]);

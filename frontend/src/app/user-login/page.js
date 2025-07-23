@@ -11,14 +11,16 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/FireBase";
 import { useRouter } from "next/navigation";
 import { User } from "lucide-react";
-import useUserStore from "@/store/UserIdStore";
+import useUserStore from "@/store/UserStore";
 import Providers from "../components/providers";
 // import { userRef,modifyUserRef } from "../components/User";
 
 const UserLoginPage = ()=> {
+  const [userId,setUserId] = useState("")
   // const { userId, userData,setUserId,setUserData } = useUserStore.getState(); 
-  const {userId,useData,setUserId,setUserData} = useUserStore()
-  
+  //const {userId, userData, setUserId, setUserData,clearUserId} = useUserStore()
+  const setUserData = useUserStore((state) => state.setUserData)
+
   const router = useRouter()
     const handleNavigation = (path, item) => {
       router.push(path)
@@ -79,11 +81,29 @@ const UserLoginPage = ()=> {
             });
 
             setMessage(response.data.message || 'Operation completed successfully.');
-            fetchUsers();
             console.log(`response user id is ${response.data.user._id}`);
-            console.log(`response user is ${response.data.user}`);
-            setUserId(response.data.user._id)
-            setUserData()
+            console.log(`response user is ${JSON.stringify(response.data.user)}`);
+            // setUserId(response.data.user._id)
+            setUserData(response.data.user._id, response.data.user)
+//             const useDogStore = create(() => ({ paw: true, snout: true, fur: true }))
+// // Getting non-reactive fresh state
+// const paw = useDogStore.getState().paw
+// // Listening to all changes, fires synchronously on every change
+// const unsub1 = useDogStore.subscribe(console.log)
+// // Updating state, will trigger listeners
+// useDogStore.setState({ paw: false })
+// // Unsubscribe listeners
+// unsub1()
+
+// // You can of course use the hook as you always would
+// function Component() {
+//   const paw = useDogStore((state) => state.paw)
+//   ...
+            // console.log(`user id inside zustand (real) is ${useUserStore((state)=>state.UserId)}`)
+
+            // console.log(`user id inside zustand is: ${JSON.stringify(useUserStore.getState(userId))} and user data inside zustand is: ${JSON.stringify(useUserStore.getState(userData))}}`)
+
+            fetchUsers();
             // console.log(`user ref id is:${User.userRef.current}`);
             // User.modifyUserRef(response.data.user._id);
             // console.log(`user ref new id is:${User.userRef.current}`);
@@ -142,6 +162,8 @@ const UserLoginPage = ()=> {
             alert ("user logged in successfuly") //message to user
             //insert mongo stuff
             handleCommand('selectByEmail')
+            console.log("this is after handle command, before navigation")
+            console.log(JSON.stringify(useUserStore.getState(userId)))
             // console.log(userRef)
             handleNavigation("/Homepage")
         }
@@ -171,7 +193,7 @@ const UserLoginPage = ()=> {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center p-4">
-      <User></User>
+      {/* <User></User> */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}

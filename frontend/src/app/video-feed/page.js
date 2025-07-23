@@ -6,6 +6,7 @@ import VideoCard from "./VideoCard";
 
 const VideoPage = () => {
     const videoPosts = [{
+        _id:1,
         mediaUrl: "",
         mediaType: "video",
         comments: [{
@@ -27,6 +28,7 @@ const VideoPage = () => {
                 <div className="max-w-3xl mx-auto">
                     {videoPosts.map((post) => (
                         <VideoCard
+                            key={post._id}
                             post={post}
                         />
                     ))}

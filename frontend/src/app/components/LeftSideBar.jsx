@@ -7,7 +7,7 @@ import useSidebarStore from "@/store/sidebarStore"
 import { Bell, Home, MessageCircle, User, Users, Video } from "lucide-react"
 import { useRouter } from "next/navigation"
 import React from "react"
-import LeftSideBarButtonComponent from "./LeftSideBarButton"
+import ButtonComponent from "./ButtonComponent"
 
 const LeftSideBar = () => {
     const { isSidebarOpen, toggleSidebar } = useSidebarStore()
@@ -35,36 +35,36 @@ const LeftSideBar = () => {
                             onClick={() => handleNavigation('/')}>
                             <Home className="mr-4" />Home
                         </Button> */}
-                        <LeftSideBarButtonComponent buttonText="Home" />
+                        <ButtonComponent buttonText="Home" />
                         {/* <Button variant="ghost" className="w-full justify-start"
                             onClick={() => handleNavigation('/friends-list')}>
                             <Users className="mr-4" />Friends
                         </Button> */}
-                        <LeftSideBarButtonComponent buttonText="Friends" />
+                        <ButtonComponent buttonText="Friends" />
 
                         {/* <Button variant="ghost" className="w-full justify-start"
                             onClick={() => handleNavigation('/video-feed')}>
                             <Video className="mr-4" />Video
                         </Button> */}
-                        <LeftSideBarButtonComponent buttonText="Video" />
+                        <ButtonComponent buttonText="Video" />
 
                         {/* <Button variant="ghost" className="w-full justify-start"
                             onClick={() => handleNavigation('/user-profile')}>
                             <User className="mr-4" />Profile
                         </Button> */}
-                        <LeftSideBarButtonComponent buttonText="Profile" />
+                        <ButtonComponent buttonText="Profile" />
 
                         {/* <Button variant="ghost" className="w-full justify-start"
                             onClick={() => handleNavigation('/')}>
                             <MessageCircle className="mr-4" />Messages
                         </Button> */}
-                        <LeftSideBarButtonComponent buttonText="Messages" />
+                        <ButtonComponent buttonText="Messages" />
 
                         {/* <Button variant="ghost" className="w-full justify-start"
                             onClick={() => handleNavigation('/')}>
                             <Bell className="mr-4" />Notifications
                         </Button> */}
-                        <LeftSideBarButtonComponent buttonText="Notifications" />
+                        <ButtonComponent buttonText="Notifications" />
                         
                     </div>
                 </nav>

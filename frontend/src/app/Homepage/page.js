@@ -6,9 +6,12 @@ import RightSideBar from "../components/RightSideBar"
 import StorySection from "../story/StorySection"
 import NewPostForm from "../components/posts/NewPostForm"
 import PostCard from "../components/posts/PostCard"
-
+import useUserStore from "@/store/UserStore";
 
 const HomePage = () => {
+    //const user = useUserStore.getState().userId
+    console.log(JSON.stringify(useUserStore.getState().userId))
+
     const [isPostFormOpen, setIsPostFormOpen] = useState(false)
     const post = [{
         _id: 1,

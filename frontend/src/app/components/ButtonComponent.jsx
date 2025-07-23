@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Bell, Home, MessageCircle, User, Users, Video } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const LeftSideBarButtonComponent = ({ buttonText = "none" }) => {
+const ButtonComponent = ({ buttonText = "none", isHeader = false }) => {
   const router = useRouter();
 
   let Icon = Home;
@@ -48,14 +48,14 @@ const LeftSideBarButtonComponent = ({ buttonText = "none" }) => {
     <div>
       <Button
         variant="ghost"
-        className="w-full justify-start"
+          className={isHeader ? "text-gray-600 dark:text-gray-400 hover:text-blue-600 hover:bg-transparent" : "w-full justify-start"} //if header, we don't want text
         onClick={handleNavigation}
       >
-        <Icon className="mr-4" />
-        {buttonText}
+        <Icon className={isHeader ? "" : "mr-4"} />
+        {!isHeader && buttonText}
       </Button>
     </div>
   );
 };
 
-export default LeftSideBarButtonComponent;
+export default ButtonComponent;

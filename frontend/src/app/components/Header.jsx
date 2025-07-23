@@ -12,8 +12,11 @@ import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "./FireBase";
 import AvatarFacebook from "@/components/ui/avatar-facebook";
+import ButtonComponent from "./ButtonComponent";
+import useUserStore from "@/store/UserStore";
 
 const Header = () => {
+  const clearStore = useUserStore((state) => state.clearUser)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const { toggleSidebar } = useSidebarStore()
@@ -24,6 +27,7 @@ const Header = () => {
   const handleSignOut = async()=>{ //close firebase connection
         await signOut(auth)
         alert ("user signed out!")
+        clearStore()
         handleNavigation("/user-login")
         // move to login page with link
     }
@@ -69,7 +73,11 @@ const Header = () => {
           </div>
         </div>
         <nav className="hidden md:flex justify-around w-[40%] max-w-md">
-          {[
+          <ButtonComponent buttonText="home" isHeader = "true"/>
+          <ButtonComponent buttonText="video" isHeader = "true"/>
+          <ButtonComponent buttonText="friends" isHeader = "true"/>
+          
+          {/* {[
             { icon: Home, path: "/", name: "home" },
             { icon: Video, path: "/video-feed", name: "video" },
             { icon: Users, path: "/friends-list", name: "friends" },
@@ -82,7 +90,7 @@ const Header = () => {
               onClick={()=>handleNavigation(path)}>
               <Icon />
             </Button>
-          ))}
+          ))} */}
         </nav>
         {/*user profile menu*/}
         <div className="flex space-x-2 md:space-x-4 items-center">

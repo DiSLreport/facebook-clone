@@ -4,8 +4,11 @@ import LeftSideBar from "../components/LeftSideBar";
 import { FriendCardSkeleton, NoFriendsMessage } from "@/lib/Skeleten";
 import FriendRequest from "./FriendRequest";
 import FriendSuggestion from "./FriendSuggestion";
-
+import useUserStore from "@/store/UserStore";
 const FriendListPage = () => {
+    console.log(JSON.stringify(useUserStore.getState().userId))
+
+    const _id = 1;
     const [loading, setLoading] = useState(false)
     const friendRequest = [{}]
     const friendSuggestion = [{
@@ -27,7 +30,9 @@ const FriendListPage = () => {
                     ) : (
                         friendRequest.map((friend) => (//need unique key here
                             <FriendRequest 
+
                              friend={friend}
+                             key = {friend._id}
                              />
                         ))
                     )}
@@ -44,7 +49,7 @@ const FriendListPage = () => {
                         />
                     ) : (
                         friendSuggestion.map((friend) => (
-                            <FriendSuggestion friend={friend}/>
+                            <FriendSuggestion key = {friend._id} friend={friend}/>
                         ))
                     )}
                 </div>

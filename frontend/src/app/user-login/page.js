@@ -11,10 +11,14 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/FireBase";
 import { useRouter } from "next/navigation";
 import { User } from "lucide-react";
+import useUserStore from "@/store/UserIdStore";
 import Providers from "../components/providers";
 // import { userRef,modifyUserRef } from "../components/User";
 
 const UserLoginPage = ()=> {
+  // const { userId, userData,setUserId,setUserData } = useUserStore.getState(); 
+  const {userId,useData,setUserId,setUserData} = useUserStore()
+  
   const router = useRouter()
     const handleNavigation = (path, item) => {
       router.push(path)
@@ -23,7 +27,7 @@ const UserLoginPage = ()=> {
   const [showPassword, setShowPassword] = useState(false); //toggle password visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); //toggle password visibility
   const [users,setUsers] = useState([])
-  const [userId,setUserId] = useState('')
+  // const [userId,setUserId] = useState('')
   const [message, setMessage] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -78,6 +82,8 @@ const UserLoginPage = ()=> {
             fetchUsers();
             console.log(`response user id is ${response.data.user._id}`);
             console.log(`response user is ${response.data.user}`);
+            setUserId(response.data.user._id)
+            setUserData()
             // console.log(`user ref id is:${User.userRef.current}`);
             // User.modifyUserRef(response.data.user._id);
             // console.log(`user ref new id is:${User.userRef.current}`);

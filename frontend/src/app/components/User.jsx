@@ -31,17 +31,17 @@ function User(){
     //   const [message, setMessage] = useState('');
     //   const [newEmail, setNewEmail] = useState('');
   
-    useEffect(()=>{
-    const userComponentRef= useRef(null);
-  },[]);
+//     useEffect(()=>{
+//     const userComponentRef= useRef(null);
+//   },[]);
   
-  const modifyUserComponentRef = (modifiedUserComponentRef)=>{
-    userComponentRef.current = modifiedUserComponentRef
-  }
+//   const modifyUserComponentRef = (modifiedUserComponentRef)=>{
+//     userComponentRef.current = modifiedUserComponentRef
+//   }
   
-  useEffect(()=>{
-      fetchUsers();
-    },[]);
+//   useEffect(()=>{
+//       fetchUsers();
+//     },[]);
   
     
     const fetchUsers = async () => {

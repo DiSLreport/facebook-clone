@@ -6,22 +6,22 @@ import Header from './Header'
 
 export default function Providers({ children }) {
   const [mounted, setMounted] = useState(false)
-
+  // const userRef = useRef("null");
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  useEffect(()=>
-  {
-    const userRef = useRef("null");
+  // useEffect(()=>
+  // {
+  //   userRef = useRef("null");
 
-  },[])
+  // },[])
   
-  const modifyUserRef = (modifiedUserRef)=>{
-    userRef.current = modifiedUserRef
-  }
+  // const modifyUserRef = (modifiedUserRef)=>{
+  //   userRef.current = modifiedUserRef
+  // }
 
-  console.log(`inside providers, user ref is ${userRef}`);
+  // console.log(`inside providers, user ref is ${userRef}`);
 
   const pathname = usePathname();
   const hideHeader = pathname === '/user-login';

@@ -64,10 +64,10 @@ const UserLoginPage = ()=> {
     console.log(`this is the command ${command}, this is the data${data}`)
         try {
           console.log("inside handle command")
-            const response = await axios.post('http://localhost:5000/api/users', { //problem might be here
+            const response = await axios.post('http://localhost:5000/api/users', { 
                 command,
                 data: {
-                    signUpName:signupData.firstName+" " +signupData.lastName, 
+                    signUpName:signupData.firstName+ " " +signupData.lastName, 
                     signUpEmail:signupData.email.toLowerCase(),
                     signUpPassword:signupData.password,
                     signUpDateOfBirth:signupData.dateOfBirth,
@@ -161,7 +161,7 @@ const UserLoginPage = ()=> {
             await signInWithEmailAndPassword(auth,loginData.email,loginData.password)
             alert ("user logged in successfuly") //message to user
             //insert mongo stuff
-            handleCommand('selectByEmail')
+            await handleCommand('selectByEmail')
             console.log("this is after handle command, before navigation")
             console.log(JSON.stringify(useUserStore.getState(userId)))
             // console.log(userRef)

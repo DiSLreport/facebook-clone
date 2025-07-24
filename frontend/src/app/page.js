@@ -8,9 +8,14 @@ import { useRouter } from "next/navigation";
 import { useRef } from "react";
 // import User, { userRef } from "./components/User";
 import useUserStore from "@/store/UserStore";
+import { useStore } from "zustand";
 
 export default function Home() {
-    const userId = useUserStore.getState().userId
+    // const userId = useUserStore.getState().userId
+    const userId = useStore(useUserStore, (state)=>state.userId)
+    // const position = useStore(positionStore, (state) => state.position)
+
+
     const router = useRouter()
       const handleNavigation = (path, item) => {
         useEffect(() => { //creating a timer with useeffect to avoid routing before loading the component

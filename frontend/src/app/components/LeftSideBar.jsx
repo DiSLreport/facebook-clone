@@ -26,9 +26,9 @@ const LeftSideBar = () => {
                 <nav className="space-y-4 flex-grow">
                     <div className="flex items-center space-x-2 cursor-pointer">
                         <AvatarFacebook/>
-                        <span className="font-semibold">
+                        {/* <span className="font-semibold">
                             Generic Name
-                        </span>
+                        </span> */}
                     </div>
                     <div>
                         {/* <Button variant="ghost" className="w-full justify-start"
@@ -71,12 +71,12 @@ const LeftSideBar = () => {
                 {/*footer here*/}
                 <div className="mb-16">
                     <Separator className="my-4" />
-                    <div className="flex items-center space-x-2 mb-4 cursor-pointer">
+                    {/* <div className="flex items-center space-x-2 mb-4 cursor-pointer"> */}
                         <AvatarFacebook/>
-                        <span className="font-semibold">
+                        {/* <span className="font-semibold">
                             Generic Name
-                        </span>
-                    </div>
+                        </span> */}
+                    {/* </div> */}
                     <div className="text-xs text-muted-foreground space-y-1">
                         <p>Privacy Terms Advertising</p>
                         <p>Effi Land 2025</p>

@@ -17,6 +17,7 @@ import useUserStore from "@/store/UserStore";
 
 const Header = () => {
   const clearStore = useUserStore((state) => state.clearUser)
+  const userEmail = useUserStore.getState().userData.email
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const { toggleSidebar } = useSidebarStore()
@@ -114,11 +115,11 @@ const Header = () => {
             <DropdownMenuContent className="w-64 z-50" align="end">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <div className="flex items-center">
+                  <div className="">
                     <AvatarFacebook/>
                     <div className="">
-                      <p className="text-sm font-medium leadin-none"> Generic Name</p>
-                      <p className="text-xs mt-2 text-gray-600 leadin-none"> Email@ of user.com</p>
+                      {/* <p className="text-sm font-medium leadin-none"> Allah</p> */}
+                      <p className="text-xs mt-2 text-gray-600 leadin-none"> {userEmail}</p>
                     </div>
                   </div>
                 </div>

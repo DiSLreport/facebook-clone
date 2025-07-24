@@ -8,8 +8,14 @@ import { Bell, Home, MessageCircle, User, Users, Video } from "lucide-react"
 import { useRouter } from "next/navigation"
 import React from "react"
 import ButtonComponent from "./ButtonComponent"
+import useUserStore from "@/store/UserStore"
+import { useStore } from "zustand"
 
 const LeftSideBar = () => {
+    // const userId = useStore(useUserStore, (state)=>state.userId)
+    // const userName = useStore(useUserStore,(state)=>state.userData.name)
+    // const userMediaUrl = useStore(useUserStore,(state)=>state.userData.userMediaUrl)
+    // const userMediaType = useStore(useUserStore,(state)=>state.userData.userMediaType)
     const { isSidebarOpen, toggleSidebar } = useSidebarStore()
     const router = useRouter()
     const handleNavigation = (path, item) => {
@@ -25,7 +31,15 @@ const LeftSideBar = () => {
                 {/*navagation menu*/}
                 <nav className="space-y-4 flex-grow">
                     <div className="flex items-center space-x-2 cursor-pointer">
-                        <AvatarFacebook/>
+                        <AvatarFacebook
+                        userName ={userName}
+                        userId={userId}
+                        userMedia={userMediaUrl}
+                        
+                        // userName = {"Lior"}
+                        // userId = {1}
+                        // userImage = "https://images.unsplash.com/photo-1530092285049-1c42085fd395?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zmxvd2VyJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww"
+                        />
                         {/* <span className="font-semibold">
                             Generic Name
                         </span> */}

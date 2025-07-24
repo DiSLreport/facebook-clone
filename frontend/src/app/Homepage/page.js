@@ -1,18 +1,41 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import LeftSideBar from "../components/LeftSideBar"
 import RightSideBar from "../components/RightSideBar"
 import StorySection from "../story/StorySection"
 import NewPostForm from "../components/posts/NewPostForm"
 import PostCard from "../components/posts/PostCard"
 import useUserStore from "@/store/UserStore";
-
+import axios from "axios";
+import { useStore } from "zustand";
 const HomePage = () => {
+    const [posts,setPosts] = useState([])
     //const user = useUserStore.getState().userId
-    console.log(JSON.stringify(useUserStore.getState().userId))
+    const userId = useStore(useUserStore, (state)=>state.userId)
+    console.log(`inside post page js, current userId is: ${JSON.stringify(userId)}`)
+   
+
+useEffect(()=>{
+    fetchPosts();
+  },[]);
+
+
+const fetchPosts = async () => {
+        try {
+            const response = await axios.post('http://localhost:5000/api/posts', {
+                command: 'select',
+                data: {}
+            });
+            setPosts(response.data.posts || []);
+        } catch (error) {
+            console.error(error);
+            setMessage('Error fetching posts: ' + (error.response?.data?.message || error.message));
+        }
+    };
 
     const [isPostFormOpen, setIsPostFormOpen] = useState(false)
+
     const post = [{
         _id: 1,
         content: "Hello Effi (message from Homepage->page)",
@@ -25,6 +48,8 @@ const HomePage = () => {
             },
         }]
     },];
+
+
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
 

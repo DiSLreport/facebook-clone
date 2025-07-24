@@ -17,7 +17,8 @@ import useUserStore from "@/store/UserStore";
 
 const Header = () => {
   const clearStore = useUserStore((state) => state.clearUser)
-  const userEmail = useUserStore.getState().userData.email
+  const userEmail = useUserStore((state) => state.email)
+  ///const userEmail = useUserStore.getState().userData.email
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const { toggleSidebar } = useSidebarStore()

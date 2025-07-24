@@ -7,13 +7,14 @@ import { MessageCircle, MoreHorizontal, ThumbsUp, Share, Share2 } from "lucide-r
 import { Separator } from "@radix-ui/react-separator";
 import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger, DialogHeader } from "@/components/ui/dialog";
 import PostComments from "./PostComments";
+import AvatarFacebook from "@/components/ui/avatar-facebook";
 
 
 const PostCard = ({ post }) => {
     const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
     const [showComments, setShowComments] = useState(false)
     const generateSharedLink = () => {
-        return `http://localhost:3000/${post?.id}`
+        return `http://localhost:3000/${post?._id}`
     }
     const handleShare = (platform) => {
         const url = generateSharedLink()
@@ -49,15 +50,10 @@ const PostCard = ({ post }) => {
                 <CardContent className="p-6 dark:text-white">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center space-x-3 cursor-pointer">
-                            <Avatar>
-                                <AvatarImage />
-                                <AvatarFallback className="dark:bg-gray-400">
-                                    D
-                                </AvatarFallback>
-                            </Avatar>
+                            <AvatarFacebook/>
                             <div>
-                                <p className="font-semibold dark:text-white">Generic Name</p>
-                                <p className="font-semibold text-gray-500">20-05-2025</p>
+                                {/* <p className="font-semibold dark:text-white">Generic Name</p> */}
+                                <p className="font-semibold text-gray-500">created at: 20-05-2025</p>
                             </div>
                         </div>
                         <Button variant="ghost" className="dark:hover:bg-gray-500">
@@ -75,11 +71,11 @@ const PostCard = ({ post }) => {
                     {post?.mediaUrl && post.mediaType === "video" && (
                         <video controls className="w-full h-[500px] rounded-lg mb-4">
                             <source src={post?.mediaUrl} type='video/mp4' />
-                            your browser does not supportr the video tag
+                            your browser does not support the video tag
                         </video>
                     )}
                     <div className="flex justify-between items-center mb-4">
-                        <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer">2 likes zxc</span>
+                        <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer">2 likes</span>
                         <div className="flex gap-3">
                             <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer" onClick={() => setShowComments(!showComments)}>3 comments zxc</span>
                             <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer">shares</span>
@@ -95,7 +91,7 @@ const PostCard = ({ post }) => {
                         <Button
                             variant="ghost" className="flex-1 dark:hover:bg-gray-600"
                         >
-                            <MessageCircle className="mr-2 h-4 w-4" />commensts
+                            <MessageCircle className="mr-2 h-4 w-4" />comments
                         </Button>
                         <Dialog open={isShareDialogOpen} onOpenChange={setIsShareDialogOpen}>
                             <DialogTrigger asChild>
@@ -106,7 +102,7 @@ const PostCard = ({ post }) => {
                             </DialogTrigger>
                             <DialogContent>
                                 <DialogHeader>
-                                    <DialogTitle>Share with friensz</DialogTitle>
+                                    <DialogTitle>Share with friends</DialogTitle>
                                     <DialogDescription>share with who?</DialogDescription>
                                 </DialogHeader>
                                 <div className="flex flex-col space-y-4">

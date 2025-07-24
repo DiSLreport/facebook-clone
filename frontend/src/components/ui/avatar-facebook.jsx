@@ -1,32 +1,61 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useUserStore from "@/store/UserStore";
+import { useStore } from "zustand";
 //import UseUserFirstLetter from "./UseUserFirstLetter";
 
 
 const AvatarFacebook = ({
-  avatarClassNameSpesific = "h-10 w-10",
-  avatarFallbackclassNameSpesific = "dark:bg-gray-400",
-  userName = "Generic User", //username from mongo, need to implement
+  avatarClassNameSpecific = "h-10 w-10",
+  avatarFallbackclassNameSpecific = "dark:bg-gray-400",
+  userName = null,
+  userId = null,
+  userMedia = "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?_gl=1*152dzl8*_ga*MTgxNjQxNzQyMi4xNzUzMzYyMDg2*_ga_8JE65Q40S6*czE3NTMzNjIwODYkbzEkZzEkdDE3NTMzNjIwOTAkajU2JGwwJGgw"
 }) => {
+  const connectedUserId = useStore(useUserStore, (state)=>state.userId)
+  const connectedUserName = useStore(useUserStore,(state)=>state.userData.name)
+  const connectedUserMediaUrl = useStore(useUserStore,(state)=>state.userData.userMediaUrl)
   
-userName = useUserStore.getState().userData.name
+  //const connectedUserMediaType = useStore(useUserStore,(state)=>state.userData.userMediaType)  
+  // if (!userId && useStore(useUserStore.getState().userId)){
+  //   console.log(`user id inside avatar facebook is null, userName is: ${userName}`)
+  //      userId = useStore(useUserStore, (state)=>state.userId)
+  //      userName = useStore(useUserStore,(state)=>state.userData.name)
+  //      userImage = useStore(useUserStore,(state)=>state.userData.userImageUrl)       
+  // }
+
 //   {/const firstNameLetter = userName?.charAt(0).toUpperCase() || "H";/}
 //   const firstNameLetter = <UseUserFirstLetter/> 
   return (
     <div className="flex items-center space-x-2 mb-4 cursor-pointer">
-    <div>
-      <Avatar className={avatarClassNameSpesific}>
-        <AvatarImage src="https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt5f18c2119ce26485/6668df65db90945e0caf9be6/beautiful-flowers-lotus.jpg?q=70&width=3840&auto=webp" alt="User Avatar" />
-        <AvatarFallback className={avatarFallbackclassNameSpesific}>
-         
+      {userId===connectedUserId ? (
+        <div className="flex items-center gap-2">
+          
+        <Avatar className={avatarClassNameSpecific}>
+        <AvatarImage src={connectedUserMediaUrl} alt="User Avatar" />
+        <AvatarFallback className={avatarFallbackclassNameSpecific}>
          {/* {firstNameLetter}*/}
         </AvatarFallback>
-      </Avatar>
+        </Avatar>
+        <span className="font-semibold">
+        {connectedUserName}
+        </span>
+        </div>
+      ):(
+        <div className="flex items-center gap-2">
+        <Avatar className={avatarClassNameSpecific}>
+        <AvatarImage src={userMedia} alt="User Avatar" />
+        <AvatarFallback className={avatarFallbackclassNameSpecific}>
+         {/* {firstNameLetter}*/}
+        </AvatarFallback>
+        </Avatar>
+        <span className="font-semibold">
+        {userName}
+        </span>
+        </div>
+      )}
+      
     </div>
-    <span className="font-semibold">
-    {userName}
-    </span>
-    </div>
+    
   );
 };
 

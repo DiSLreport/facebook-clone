@@ -10,6 +10,7 @@ import { ImageIcon, Laugh, Plus, Video, X } from "lucide-react";
 import React, { useState } from "react";
 import { motion } from 'framer-motion';
 import dynamic from "next/dynamic";
+import AvatarFacebook from "@/components/ui/avatar-facebook";
 
 const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false });
 
@@ -58,13 +59,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
                                     Create Post
                                     <Separator />
                                     <div className="flex items-center space-x-3">
-                                        <Avatar className="h-10 w-10">
-                                            <AvatarImage />
-                                            <AvatarFallback className="dark:bg-gray-400">D</AvatarFallback>
-                                        </Avatar>
-                                        <div>
-                                            <p className="font-semibold">Generic Name</p>
-                                        </div>
+                                        <AvatarFacebook/>
                                     </div>
                                     <Textarea placeholder={"what is on your mind? Generic Name"}
                                         className="min-h-[100px] text-lg" />

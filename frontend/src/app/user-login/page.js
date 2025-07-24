@@ -69,11 +69,13 @@ const UserLoginPage = ()=> {
                 data: {
                     signUpName:signupData.firstName+ " " +signupData.lastName, 
                     signUpEmail:signupData.email.toLowerCase(),
-                    signUpPassword:signupData.password,
+                    // signUpPassword:signupData.password,
                     signUpDateOfBirth:signupData.dateOfBirth,
                     signUpGender:signupData.gender,
                     logInEmail:loginData.email.toLowerCase(),
-                    logInPassword:loginData.password,
+                    // logInPassword:loginData.password,
+                    userMediaUrl:"https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt5f18c2119ce26485/6668df65db90945e0caf9be6/beautiful-flowers-lotus.jpg?q=70&width=3840&auto=webp",
+                    userMediaType: "image",
                     userId,
                     newEmail,
                     ...data

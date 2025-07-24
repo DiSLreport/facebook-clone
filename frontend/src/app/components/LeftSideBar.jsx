@@ -12,7 +12,7 @@ import useUserStore from "@/store/UserStore"
 import { useStore } from "zustand"
 
 const LeftSideBar = () => {
-    // const userId = useStore(useUserStore, (state)=>state.userId)
+    const userId = useStore(useUserStore, (state)=>state.userId)
     // const userName = useStore(useUserStore,(state)=>state.userData.name)
     // const userMediaUrl = useStore(useUserStore,(state)=>state.userData.userMediaUrl)
     // const userMediaType = useStore(useUserStore,(state)=>state.userData.userMediaType)
@@ -32,10 +32,7 @@ const LeftSideBar = () => {
                 <nav className="space-y-4 flex-grow">
                     <div className="flex items-center space-x-2 cursor-pointer">
                         <AvatarFacebook
-                        userName ={userName}
-                        userId={userId}
-                        userMedia={userMediaUrl}
-                        
+                        userId={userId}                        
                         // userName = {"Lior"}
                         // userId = {1}
                         // userImage = "https://images.unsplash.com/photo-1530092285049-1c42085fd395?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zmxvd2VyJTIwd2FsbHBhcGVyfGVufDB8fDB8fHww"
@@ -86,7 +83,7 @@ const LeftSideBar = () => {
                 <div className="mb-16">
                     <Separator className="my-4" />
                     {/* <div className="flex items-center space-x-2 mb-4 cursor-pointer"> */}
-                        <AvatarFacebook/>
+                        <AvatarFacebook userId={userId}/>
                         {/* <span className="font-semibold">
                             Generic Name
                         </span> */}

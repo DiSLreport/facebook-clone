@@ -14,10 +14,12 @@ import { auth } from "./FireBase";
 import AvatarFacebook from "@/components/ui/avatar-facebook";
 import ButtonComponent from "./ButtonComponent";
 import useUserStore from "@/store/UserStore";
+import { useStore } from "zustand";
 
 const Header = () => {
   const clearStore = useUserStore((state) => state.clearUser)
   const userEmail = useUserStore((state) => state.email)
+  const userId = useStore(useUserStore, (state)=>state.userId)
   ///const userEmail = useUserStore.getState().userData.email
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { theme, setTheme } = useTheme()
@@ -62,7 +64,7 @@ const Header = () => {
                     <div className="flex item-center space-x-8 p-2 hover:bg-gray-100 dark:hover:bg-gary-700 rounded cursor-pointer">
                       <Search className='absolute text-sm text-gray-400' />
                       <div className="flex items-center gap-2">
-                        <AvatarFacebook/>
+                     <AvatarFacebook userId={userId}/>
                         <span>
                           Generic Name
                         </span>
@@ -110,14 +112,14 @@ const Header = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button className="relative h-8 w-8 rounded-full" variant="ghost">
-                <AvatarFacebook/>
+                <AvatarFacebook userId={userId}/>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-64 z-50" align="end">
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                   <div className="">
-                    <AvatarFacebook/>
+                    <AvatarFacebook userId={userId}/>
                     <div className="">
                       {/* <p className="text-sm font-medium leadin-none"> Allah</p> */}
                       <p className="text-xs mt-2 text-gray-600 leadin-none"> {userEmail}</p>

@@ -11,10 +11,14 @@ import React, { useState } from "react";
 import { motion } from 'framer-motion';
 import dynamic from "next/dynamic";
 import AvatarFacebook from "@/components/ui/avatar-facebook";
+import useUserStore from "@/store/UserStore";
+import { useStore } from "zustand";
 
 const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false });
 
 const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
+    const userId = useStore(useUserStore, (state)=>state.userId)
+    const userName = useStore(useUserStore,(state)=>state.userData.name)
     const [filePreview, setFilePreview] = useState(null)
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [postContent, setPostContent] = useState("")
@@ -25,14 +29,11 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
         <Card>
             <CardContent className="p-4">
                 <div className="flex space-x-4">
-                    <Avatar>
-                        <AvatarImage />
-                        <AvatarFallback className="dark:bg-gray-400">D</AvatarFallback>
-                    </Avatar>
+                    <AvatarFacebook userId={userId}/>
                     <Dialog open={isPostFormOpen} onOpenChange={setIsPostFormOpen}>
                         <DialogTrigger asChild>
                             <div className="w-full">
-                            <Input placeholder={"what on your mind?"}
+                            <Input placeholder={"what is on your mind?"}
                                 readOnly
                                 className="cursor-pointer rounded-full h-12 dark:bg-[rgb(58,59,60)] placeholder:text-gray-500  dark:placeholder:text-gray-400"
                             />
@@ -59,9 +60,9 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
                                     Create Post
                                     <Separator />
                                     <div className="flex items-center space-x-3">
-                                        <AvatarFacebook/>
+                                    <AvatarFacebook userId={userId}/>
                                     </div>
-                                    <Textarea placeholder={"what is on your mind? Generic Name"}
+                                    <Textarea placeholder={`what is on your mind? ${userName}`}
                                         className="min-h-[100px] text-lg" />
                                     <AnimatePresence>
                                         <motion.div

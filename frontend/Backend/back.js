@@ -14,7 +14,7 @@ mongoose.connect('mongodb+srv://avraham91:clU22iZVqpWsDvfZ@cluster-android-2.1wu
 .catch(err=>console.error("MongoDB connection error:",err));
 
 const postSchema = new mongoose.Schema({
-    postText: String,
+    postText: {type:String, required:[true, "post text required"]},
     creatorId:{type:String, required:[true, "creatorId required"]},
     imageUrl: String, 
 },{timestamps: true});
@@ -93,13 +93,14 @@ app.post('/api/posts', async (req,res)=>{ //req: data from client res: what we s
     try{
         switch(command){
             case 'insert':
+                console.log(data.creatorId)
                 const newPost = new Post({
                     postText:data.postContent, 
-                    creatorId:data.userId,
+                    creatorId:data.creatorId,
                     mediaUrl:data.mediaUrl,
                     mediaType:data.mediaType,
-                    comments:data.comments})
-                    ;//input validation should be here...
+                    comments:data.comments});
+                    //input validation should be here...
                 await newPost.save(); //save to database
                 return res.json({message:'post insert successful',post:newPost});
             case 'select':

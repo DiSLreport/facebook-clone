@@ -10,11 +10,10 @@ import useUserStore from "@/store/UserStore";
 import axios from "axios";
 import { useStore } from "zustand";
 const HomePage = () => {
+    const [message,setMessage] = useState("")
     const [posts,setPosts] = useState([])
-    //const user = useUserStore.getState().userId
     const userId = useStore(useUserStore, (state)=>state.userId)
     console.log(`inside post page js, current userId is: ${JSON.stringify(userId)}`)
-   
 
 useEffect(()=>{
     fetchPosts();
@@ -33,6 +32,33 @@ const fetchPosts = async () => {
             setMessage('Error fetching posts: ' + (error.response?.data?.message || error.message));
         }
     };
+
+
+    const handlePostCommand = async(command,textAreaPostContent,userId, data = {}) => {
+            try{
+                console.log(`this is the command ${command}, this is the data ${JSON.stringify(data)}, this is the post content ${JSON.stringify(textAreaPostContent)}`)
+                console.log(`inside handle post, user id is ${userId}`)
+                const response = await axios.post('http://localhost:5000/api/posts',{
+                command,
+                data:{
+                postContent:textAreaPostContent,
+                creatorId:userId,
+                ...data
+                //imageUrl:needToImplement
+                }
+                });
+                setMessage(response.data.message || 'Operation completed successfully.');
+                console.log(`response post id is ${response.data.post._id}`);
+                console.log(`response post is ${response.data.post}`);
+                //zustand store actions here maybe?
+                fetchPosts();
+                }
+            catch(error){
+            console.error(error);
+            setMessage('Error: ' + (error.response?.data?.message||error.message));
+            }
+        }
+
 
     const [isPostFormOpen, setIsPostFormOpen] = useState(false)
 
@@ -59,6 +85,7 @@ const fetchPosts = async () => {
                     <div className="lg:ml-2 xl:ml-28">
                         <StorySection />
                         <NewPostForm
+                            handlePostCommand={handlePostCommand}
                             isPostFormOpen={isPostFormOpen}
                             setIsPostFormOpen={setIsPostFormOpen}
                         />
@@ -80,4 +107,5 @@ const fetchPosts = async () => {
         </div>
     )
 }
+
 export default HomePage

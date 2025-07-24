@@ -18,8 +18,10 @@ import { useStore } from "zustand";
 
 const Header = () => {
   const clearStore = useUserStore((state) => state.clearUser)
-  const userEmail = useUserStore((state) => state.email)
   const userId = useStore(useUserStore, (state)=>state.userId)
+  if(!userId) return
+  const userEmail = useUserStore((state) => state.userData.email)
+  console.log(`inside header, user email is ${userEmail} and userId is ${userId} `)
   ///const userEmail = useUserStore.getState().userData.email
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { theme, setTheme } = useTheme()
@@ -37,6 +39,7 @@ const Header = () => {
     }
 
   return (
+    
     <header className="bg-white dark:bg-[rgb(36,37,38)] text-forground shadow-md h-16 fixed top-0 left-0 right-0 z-50 p-2">
       <div className="mx-auto flex justify-between items-center p-2">
         <div className="flex items-center gap-2 md:gap-4">

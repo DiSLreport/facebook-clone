@@ -16,14 +16,34 @@ import { useStore } from "zustand";
 
 const Picker = dynamic(() => import('emoji-picker-react'), { ssr: false });
 
-const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
+const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen, handlePostCommand }) => {
     const userId = useStore(useUserStore, (state)=>state.userId)
     const userName = useStore(useUserStore,(state)=>state.userData.name)
     const [filePreview, setFilePreview] = useState(null)
     const [showEmojiPicker, setShowEmojiPicker] = useState(false);
     const [postContent, setPostContent] = useState("")
+    const [textAreaPostContent, setTextAreaPostContent] = useState("")
     const handleEmojiClick = (emojiObject) => {
         setPostContent(prev => prev + emojiObject.emoji)
+    }
+    
+    
+
+    const handlePostPost = async (e) =>{
+        e.preventDefault();
+        try{
+            await handlePostCommand('insert',textAreaPostContent,userId)
+            alert ("post created successfuly")
+            //see how to close the window (look for x aria icon)
+            }
+             catch(err){
+        console.log(err)//print error to log
+    }
+    console.log("New Post:",postContent)
+        }
+
+    const handlePostChange = (e) =>{
+        setTextAreaPostContent(e.target.value)
     }
     return (
         <Card>
@@ -54,7 +74,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
 
                             </div></div>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[525px] max-h-[80vh] overflow-y-auto">
+                        <DialogContent className="sm:max-w-[525px] max-h-[80vh] overflow-y-auto" aria-describedby={undefined}>
                             <DialogHeader>
                                 <DialogTitle className="text-center">
                                     Create Post
@@ -62,7 +82,10 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
                                     <div className="flex items-center space-x-3">
                                     <AvatarFacebook userId={userId}/>
                                     </div>
-                                    <Textarea placeholder={`what is on your mind? ${userName}`}
+                                    <Textarea 
+                                        // value={textAreaPostContent}
+                                        onChange={handlePostChange}
+                                        placeholder={`what is on your mind?`}
                                         className="min-h-[100px] text-lg" />
                                     <AnimatePresence>
                                         <motion.div
@@ -131,7 +154,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen }) => {
                                 </motion.div>
                             )}
                             <div className="flex justify-end mt-4">
-                                <Button className="bg-blue-500 text-white">
+                                <Button className="bg-blue-500 text-white" onClick = {handlePostPost}>
                                     Post
                                 </Button>
                             </div>

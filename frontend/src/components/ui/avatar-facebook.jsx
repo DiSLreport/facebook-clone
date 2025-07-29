@@ -14,7 +14,10 @@ const AvatarFacebook = ({
   const connectedUserId = useStore(useUserStore, (state)=>state.userId)
   const connectedUserName = useStore(useUserStore,(state)=>state.userData.name)
   const connectedUserMediaUrl = useStore(useUserStore,(state)=>state.userData.userMediaUrl)
-  
+  const usersArray = useStore(useUserStore,(state)=>state.usersArray)
+  const postUser = usersArray.find(({_id}) => _id===userId)
+  console.log(`post user is: ${JSON.stringify(postUser)}`)
+  console.log(`post user's media url is: ${JSON.stringify(postUser?.userMediaUrl)}`)
   //const connectedUserMediaType = useStore(useUserStore,(state)=>state.userData.userMediaType)  
   // if (!userId && useStore(useUserStore.getState().userId)){
   //   console.log(`user id inside avatar facebook is null, userName is: ${userName}`)
@@ -27,7 +30,7 @@ const AvatarFacebook = ({
 //   const firstNameLetter = <UseUserFirstLetter/> 
   return (
     <div className="flex items-center space-x-2 mb-4 cursor-pointer">
-      {userId===connectedUserId ? (
+      {  userId===connectedUserId ? (
         <div className="flex items-center gap-2">
           
         <Avatar className={avatarClassNameSpecific}>
@@ -40,23 +43,28 @@ const AvatarFacebook = ({
         {connectedUserName}
         </span>
         </div>
-      ):(
+      ) :
+      (userId?(
         <div className="flex items-center gap-2">
         <Avatar className={avatarClassNameSpecific}>
-        <AvatarImage src={userMedia} alt="User Avatar" />
+        <AvatarImage src={postUser?.userMediaUrl} alt="User Avatar" />
         <AvatarFallback className={avatarFallbackclassNameSpecific}>
          {/* {firstNameLetter}*/}
         </AvatarFallback>
         </Avatar>
         <span className="font-semibold">
-        {userName}
+        {postUser?.name}
         </span>
         </div>
-      )}
-      
+      ):
+      (
+      <div/>
+      )
+    )
+  }
     </div>
     
-  );
+  )
 };
 
 export default AvatarFacebook;

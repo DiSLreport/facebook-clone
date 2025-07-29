@@ -20,6 +20,8 @@ const UserLoginPage = ()=> {
   // const { userId, userData,setUserId,setUserData } = useUserStore.getState(); 
   //const {userId, userData, setUserId, setUserData,clearUserId} = useUserStore()
   const setUserData = useUserStore((state) => state.setUserData)
+  const setStoreUsers = useUserStore((state) => state.setUsersArray)
+  
 
   const router = useRouter()
     const handleNavigation = (path, item) => {
@@ -53,10 +55,11 @@ const UserLoginPage = ()=> {
                 command: 'select',
                 data: {}
             });
-            setUsers(response.data.users || []);
+            setStoreUsers(response.data.users || []);
         } catch (error) {
             console.error(error);
             setMessage('Error fetching users: ' + (error.response?.data?.message || error.message));
+            console.log(JSON.stringify(message))
         }
     };
 
@@ -83,6 +86,7 @@ const UserLoginPage = ()=> {
             });
 
             setMessage(response.data.message || 'Operation completed successfully.');
+            console.log(JSON.stringify(message))
             console.log(`response user id is ${response.data.user._id}`);
             console.log(`response user is ${JSON.stringify(response.data.user)}`);
             // setUserId(response.data.user._id)

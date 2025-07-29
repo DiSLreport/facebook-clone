@@ -33,8 +33,8 @@ const Header = () => {
   const handleSignOut = async()=>{ //close firebase connection
         await signOut(auth)
         alert ("user signed out!")
-        clearStore()
         handleNavigation("/user-login")
+        clearStore()
         // move to login page with link
     }
 

@@ -16,8 +16,11 @@ export default function Home() {
     // const position = useStore(positionStore, (state) => state.position)
 
 
-    const router = useRouter()
-      const handleNavigation = (path, item) => {
+    // const router = useRouter()
+    // const handleNavigation = (path) =>{
+    //     router.push(path)
+    // }
+      const handleNavigation = (path, item) => { //got error when it was handleNavigation
         useEffect(() => { //creating a timer with useeffect to avoid routing before loading the component
         const timer = setTimeout(() => {
             router.push(path)

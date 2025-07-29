@@ -62,23 +62,23 @@ const fetchPosts = async () => {
 
     const [isPostFormOpen, setIsPostFormOpen] = useState(false)
 
-    const post = [{
-        _id: 1,
-        content: "Hello Effi (message from Homepage->page)",
-        mediaUrl: "https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt134818d279038650/6668df6434f6fb5cd48aac34/beautiful-flowers-rose.jpeg?q=70&width=3840&auto=webp",
-        mediaType: "image",
-        comments: [{
-            user: {
-                username: "Generic name",
-                text: "message content",
-            },
-        }]
-    },];
+    // const post = [{
+    //     _id: 1,
+    //     content: "Hello Effi (message from Homepage->page)",
+    //     mediaUrl: "https://images.contentstack.io/v3/assets/bltcedd8dbd5891265b/blt134818d279038650/6668df6434f6fb5cd48aac34/beautiful-flowers-rose.jpeg?q=70&width=3840&auto=webp",
+    //     mediaType: "image",
+    //     comments: [{
+    //         user: {
+    //             username: "Generic name",
+    //             text: "message content",
+    //         },
+    //     }]
+    // },];
 
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
-
+            {console.log(`posts in db are: ${JSON.stringify(posts)}`)}
             <main className="flex flex-1 pt-16">
                 <LeftSideBar />
                 <div className="flex-1 px-4 py-6 md:ml-64 lg:max-w-xl xl:max-w-3xl mx-auto">
@@ -90,10 +90,13 @@ const fetchPosts = async () => {
                             setIsPostFormOpen={setIsPostFormOpen}
                         />
                         <div className="mt-6 space-y-6">
-                            {post.map(post => (
+                            {posts.map(post => (
                                 <PostCard
                                     key={post._id}
-                                    post={post} />
+                                    post={post.postText}
+                                    creatorId={post.creatorId}
+                                    createdAt = {post.createdAt}
+                                    updatedAt = {post.updatedAt} />
                             ))}
                         </div>
                     </div>

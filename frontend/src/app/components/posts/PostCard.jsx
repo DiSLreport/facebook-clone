@@ -14,12 +14,12 @@ const PostCard = ({ post }) => {
     const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
     const [showComments, setShowComments] = useState(false)
     const generateSharedLink = () => {
-        return `http://localhost:3000/${post?._id}`
+        return `http://localhost:3000/${post?._id}` //for this to work we need to implement posts url
     }
     const handleShare = (platform) => {
         const url = generateSharedLink()
         let shareUrl;
-        switch (platform) {
+        switch (platform) { //for this to work we need to implement posts url
             case "facebook":
                 shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
                 break;
@@ -50,18 +50,18 @@ const PostCard = ({ post }) => {
                 <CardContent className="p-6 dark:text-white">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center space-x-3 cursor-pointer">
-                            <AvatarFacebook/>
+                            <AvatarFacebook userId = {post.creatorId}/>
                             <div>
                                 {/* <p className="font-semibold dark:text-white">Generic Name</p> */}
-                                <p className="font-semibold text-gray-500">created at: 20-05-2025</p>
+                                <p className="font-semibold text-gray-500">created at: {post.createdAt}</p>
                             </div>
                         </div>
                         <Button variant="ghost" className="dark:hover:bg-gray-500">
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </div>
-                    <p className="mb-4">{post?.content}</p>
-                    {post?.mediaUrl && post.mediaType === "image" && (
+                    <p className="mb-4">{post?.postText}</p>
+                    {post.mediaUrl && ( //add && post.mediaType === "image" later
                         <img
                             src={post?.mediaUrl}
                             alt='post_image'
@@ -86,7 +86,7 @@ const PostCard = ({ post }) => {
                         <Button
                             variant="ghost" className="flex-1 dark:hover:bg-gray-600"
                         >
-                            <ThumbsUp className="mr-2 h-4 w-4" />Likesz
+                            <ThumbsUp className="mr-2 h-4 w-4" />Likes
                         </Button>
                         <Button
                             variant="ghost" className="flex-1 dark:hover:bg-gray-600"

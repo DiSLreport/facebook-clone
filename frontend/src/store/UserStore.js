@@ -9,6 +9,8 @@ const useUserStore = create()(
     setUserId: (id, data = null) => set(()=>({userId:id , userData:data})),
     setUserData: (id, data) => set(()=>({userId:id, userData:data})),
     clearUser: () => set({userId:null, userData:null}),
+    usersArray:null,
+    setUsersArray: (data) => set(()=>({usersArray: data})),
 }),
 {
     name:'user-storage',//name of item in storage, has to be unique (from zustand.docs)

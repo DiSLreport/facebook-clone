@@ -91,9 +91,9 @@ const PostCard = ({ postId, postText, creatorId, createdAt, updatedAt }) => {
                         </video>
                     )} */}
                     <div className="flex justify-between items-center mb-4">
-                        <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer">2 likes</span>
+                        <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer">likes</span>
                         <div className="flex gap-3">
-                            <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer" onClick={() => setShowComments(!showComments)}>3 comments zxc</span>
+                            <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer" onClick={() => setShowComments(!showComments)}>comments</span>
                             <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer">shares</span>
                         </div>
                     </div>
@@ -147,9 +147,9 @@ const PostCard = ({ postId, postText, creatorId, createdAt, updatedAt }) => {
                                 exit={{ opacity: 0, height: 0 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <PostComments
+                                {/* <PostComments
                                     comments={post.comments}
-                                />
+                                /> */}
                             </motion.div>
                         )}
                     </AnimatePresence>

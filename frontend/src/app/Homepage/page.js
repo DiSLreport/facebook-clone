@@ -83,7 +83,7 @@ const fetchPosts = async () => {
                 <LeftSideBar />
                 <div className="flex-1 px-4 py-6 md:ml-64 lg:max-w-xl xl:max-w-3xl mx-auto">
                     <div className="lg:ml-2 xl:ml-28">
-                        <StorySection />
+                        {/* <StorySection /> */}
                         <NewPostForm
                             handlePostCommand={handlePostCommand}
                             isPostFormOpen={isPostFormOpen}

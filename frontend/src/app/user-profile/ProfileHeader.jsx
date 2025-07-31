@@ -164,7 +164,7 @@ const handleCommand = async(command,data = {}) =>{ //probably could copy or impo
 
   return (
     <div className="relative">
-      <div className="relative h-64 md:h-80 bg-gray-300 overflow-hidden">
+      {/* <div className="relative h-64 md:h-80 bg-gray-300 overflow-hidden">
         <img
           loading="lazy"
           src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L3BmLWljb240LWppcjIwNjItcG9yLWwtam9iNzg4LnBuZw.png"
@@ -180,10 +180,10 @@ const handleCommand = async(command,data = {}) =>{ //probably could copy or impo
           <Camera className="mr-0 md:mr-2 h-4 w-4" />
           <span className="hidden md:block">Edit cover photo</span>
         </Button>
-      </div>
+      </div> */}
       {/*profile section*/}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
-        <div className="flex flex-col md:flex-row items-center md:items-end md:space-x-5">
+        <div className="h-64 md:h-80 flex flex-col md:flex-row items-center md:items-end md:space-x-5">
 
           <AvatarFacebook userId = {userId} avatarClassNameSpecific="w-32 h-32 border-4 border-white dark:border-gray-700" AvatarFallback="dark:bg-gray-400"/>          
           {/* <Avatar className="w-32 h-32 border-4 border-white dark:border-gray-700">

@@ -37,7 +37,10 @@ const Header = () => {
         alert ("user signed out!")
         setIsLoggingOut(false)
         handleNavigation("/user-login")
-        // clearStore()
+        clearStore() //automatically renders the page again which causes the navigation to fail
+        //then we get an error because Homepage is loaded without store data. need to fix
+        
+        
         // move to login page with link
     }
 

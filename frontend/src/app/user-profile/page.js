@@ -6,7 +6,7 @@ const UserProfilePage = () => {
     return (
         <div>
             {<ProfileHeader />}
-            <ProfileTabs />
+            {/* <ProfileTabs /> */}
         </div>
     );
 };

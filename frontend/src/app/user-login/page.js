@@ -188,9 +188,9 @@ const UserLoginPage = ()=> {
       return;
     }
     else try{
-            await createUserWithEmailAndPassword(auth,signupData.email, signupData.password)
+            await createUserWithEmailAndPassword(auth,signupData.email, signupData.password) // new firebase user
             alert ("user registered successfuly") //message to user
-            await handleCommand('insert')
+            await handleCommand('insert') //new user data in mongo db
             handleNavigation("/Homepage")
         }
         catch (err){

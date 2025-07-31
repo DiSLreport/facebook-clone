@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
 //    password:{type:String, required:[true,"password required"]},//String,//password needs to be required, got errors when trying{type:String, required:[true,"password required"],},
    dateOfBirth:String,
    gender:String,
-   userMediaUrl: String,
+   userMediaUrl: String, //essentially profile picture url
    userMediaType: String
    //add profile image url
 },{timestamps: true});

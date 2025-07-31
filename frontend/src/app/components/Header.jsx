@@ -17,9 +17,10 @@ import useUserStore from "@/store/UserStore";
 import { useStore } from "zustand";
 
 const Header = () => {
+  const [isLoggingOut,setIsLoggingOut] = useState(false)
   const clearStore = useUserStore((state) => state.clearUser)
   const userId = useStore(useUserStore, (state)=>state.userId)
-  if(!userId) return
+  if(!userId) return //this might cause handled less hooks than expected
   const userEmail = useUserStore((state) => state.userData.email)
   console.log(`inside header, user email is ${userEmail} and userId is ${userId} `)
   ///const userEmail = useUserStore.getState().userData.email
@@ -33,8 +34,10 @@ const Header = () => {
   const handleSignOut = async()=>{ //close firebase connection
         await signOut(auth)
         alert ("user signed out!")
-        handleNavigation("/user-login")
+        setIsLoggedIn(false)
         clearStore()
+        handleNavigation("/user-login")
+        // clearStore()
         // move to login page with link
     }
 

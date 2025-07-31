@@ -10,11 +10,27 @@ import PostComments from "./PostComments";
 import AvatarFacebook from "@/components/ui/avatar-facebook";
 
 
-const PostCard = ({ post }) => {
+const PostCard = ({ postId, postText, creatorId, createdAt, updatedAt }) => {
+    console.log(`inside post card, post is: ${JSON.stringify(postText)}`)
     const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
     const [showComments, setShowComments] = useState(false)
+    const date = new Date(createdAt)
+    
+    const formattedDate = date.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+    const formattedTime = date.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+
+    // console.log(`inside post, date is ${JSON.stringify(formattedDate)}`)
+
     const generateSharedLink = () => {
-        return `http://localhost:3000/${post?._id}` //for this to work we need to implement posts url
+        return `http://localhost:3000/${postId}` //for this to work we need to implement posts url
     }
     const handleShare = (platform) => {
         const url = generateSharedLink()
@@ -41,7 +57,7 @@ const PostCard = ({ post }) => {
     }
     return (
         <motion.div
-            key={post?._id}
+            key={postId}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 1 }}
             transition={{ duration: 0.5 }}
@@ -50,30 +66,30 @@ const PostCard = ({ post }) => {
                 <CardContent className="p-6 dark:text-white">
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex items-center space-x-3 cursor-pointer">
-                            <AvatarFacebook userId = {post.creatorId}/>
+                            <AvatarFacebook userId = {creatorId}/>
                             <div>
                                 {/* <p className="font-semibold dark:text-white">Generic Name</p> */}
-                                <p className="font-semibold text-gray-500">created at: {post.createdAt}</p>
+                                <p className="font-semibold text-gray-500"> {formattedDate} {formattedTime}</p>
                             </div>
                         </div>
                         <Button variant="ghost" className="dark:hover:bg-gray-500">
                             <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </div>
-                    <p className="mb-4">{post?.postText}</p>
-                    {post.mediaUrl && ( //add && post.mediaType === "image" later
+                    <p className="mb-4">{postText}</p>
+                    {/* {post.mediaUrl && ( //add && post.mediaType === "image" later
                         <img
                             src={post?.mediaUrl}
                             alt='post_image'
                             className='w-full h-auto rounded-lg mb-4'
                         />
-                    )}
-                    {post?.mediaUrl && post.mediaType === "video" && (
+                    )} */}
+                    {/* {post?.mediaUrl && post.mediaType === "video" && (
                         <video controls className="w-full h-[500px] rounded-lg mb-4">
                             <source src={post?.mediaUrl} type='video/mp4' />
                             your browser does not support the video tag
                         </video>
-                    )}
+                    )} */}
                     <div className="flex justify-between items-center mb-4">
                         <span className="text-sm text-gray-500 dark-gray-400 hover:border-b-3 border-gray-400 cursor-pointer">2 likes</span>
                         <div className="flex gap-3">

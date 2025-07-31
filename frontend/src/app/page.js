@@ -13,58 +13,54 @@ import { useStore } from "zustand";
 export default function Home() {
     // const userId = useUserStore.getState().userId
     const userId = useStore(useUserStore, (state)=>state.userId)
+    const [path,setPath] = useState("")
     // const position = useStore(positionStore, (state) => state.position)
 
+    const router = useRouter()
 
-    // const router = useRouter()
-    // const handleNavigation = (path) =>{
-    //     router.push(path)
-    // }
-      const handleNavigation = (path, item) => { //got error when it was handleNavigation
+    useEffect(()=>{
+    if(userId)
+        setPath("/Homepage")
+    else
+    setPath("/user-login")
+    },[]);
+    
+   
+      const useHandleNavigation = (path) => { //got error when it was handleNavigation
         useEffect(() => { //creating a timer with useeffect to avoid routing before loading the component
         const timer = setTimeout(() => {
             router.push(path)
         }, 100); 
         return () => clearTimeout(timer); //we need to clean the timer, automatically called when routing
-      }, []);
+      },[path]);
       }
 
-  const [user,setUser] = useState("") //user variable
-      useEffect(()=>{//Listen to changes on user: if the user changes, set it to be the current user
-        const unsub = onAuthStateChanged(auth,(currentUser)=>{
-            setUser(currentUser)
-            // userRef.current=(currentUser)
-        })
-        return () => unsub
-    },[])//[] mean to only do this once there's a change, saves resources
+//   const [user,setUser] = useState("") //user variable
+//       useEffect(()=>{//Listen to changes on user: if the user changes, set it to be the current user
+//         const unsub = onAuthStateChanged(auth,(currentUser)=>{
+//             setUser(currentUser)
+//             // userRef.current=(currentUser)
+//         })
+//         return () => unsub
+//     },[])//[] mean to only do this once there's a change, saves resources
     
-    const handleSignOut = async()=>{ //close firebase connection
-        await signOut(auth)
-        alert ("user signed out!")
-        // move to login page with link
-    }
+//     const handleSignOut = async()=>{ //close firebase connection
+//         await signOut(auth)
+//         alert ("user signed out!")
+//         // move to login page with link
+//     }
 
   return (
         <div>
             {/* <User></User> */}
             {/* {console.log(userRef.current)} */}
-            {userId ? (
-                <div>
-                    {console.log(`user is connected ${userId}`)}
+           
+                {/* <div> */}
+                    {/* {console.log(`user is connected ${userId}`)} */}
                     {/* <h1>hello</h1> */}
-                    {handleNavigation("/Homepage")}
+            {useHandleNavigation(path)}
                     {/* <HomePage></HomePage> */}
-                </div>
-            ) : (
-            <div>
-                {console.log(`user is not connected ${userId}`)}
-                {/* <h2> Sign in or Sign up</h2> */}
-                {/* <{<SignIn/>
-                <SignUp/>}> */}
-                {handleNavigation("/user-login")}
-                {/* <Page></Page> */}
-            </div>
-            )}      
+                {/* </div> */}
         </div>
     )
 }

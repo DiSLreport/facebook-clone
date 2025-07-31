@@ -93,7 +93,8 @@ const fetchPosts = async () => {
                             {posts.map(post => (
                                 <PostCard
                                     key={post._id}
-                                    post={post.postText}
+                                    postId={post._id}
+                                    postText={post.postText}
                                     creatorId={post.creatorId}
                                     createdAt = {post.createdAt}
                                     updatedAt = {post.updatedAt} />

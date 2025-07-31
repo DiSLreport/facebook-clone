@@ -90,6 +90,8 @@ const UserLoginPage = ()=> {
             console.log(`response user id is ${response.data.user._id}`);
             console.log(`response user is ${JSON.stringify(response.data.user)}`);
             // setUserId(response.data.user._id)
+            if(command === "insert")
+              console.log(`insert command, response data user id is: ${response.data.user._id}, response data user information is: ${response.data.user}`)
             setUserData(response.data.user._id, response.data.user)
 //             const useDogStore = create(() => ({ paw: true, snout: true, fur: true }))
 // // Getting non-reactive fresh state
@@ -188,7 +190,7 @@ const UserLoginPage = ()=> {
     else try{
             await createUserWithEmailAndPassword(auth,signupData.email, signupData.password)
             alert ("user registered successfuly") //message to user
-            handleCommand('insert')
+            await handleCommand('insert')
             handleNavigation("/Homepage")
         }
         catch (err){

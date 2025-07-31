@@ -104,7 +104,10 @@ app.post('/api/posts', async (req,res)=>{ //req: data from client res: what we s
                 await newPost.save(); //save to database
                 return res.json({message:'post insert successful',post:newPost});
             case 'select':
-                const posts = await Post.find({});
+                const posts = await Post.find({}).sort({createdAt: 'descending'}); //sort, show newest first
+                //.lean();
+                // .then(posts =>res.json(posts))
+                // .catch(err=> res.status(500).json({error:err}));
                 return res.json({message: 'get your posts', posts});
             case 'selectById':
                 const postById = await Post.findById(data.postId);

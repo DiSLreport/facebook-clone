@@ -19,6 +19,7 @@ const AvatarFacebook = ({
       const postUser = usersArray.find(({_id}) => _id===userId)
       const [displayedUserName, setDisplayedUserName] = useState("");
       const [displayedUserImageUrl, setDisplayedUserImageUrl] = useState("");
+      const [isCreated, setIsCreated] = useState(false)
       console.log(`Inside avatar facebook, post user is: ${JSON.stringify(postUser)}`)
       console.log(`Inside avatar facebook, post user's media url is: ${JSON.stringify(postUser?.userMediaUrl)}`)
       
@@ -40,8 +41,14 @@ const AvatarFacebook = ({
             }
 
       useEffect(() => {
-          checkWhatUserIsConnected();
-      },[]) 
+        if(!isCreated){
+        checkWhatUserIsConnected();
+        setIsCreated(true)
+      }
+        else
+          return
+      },[userId]) //delete user id from dependency array if it causes problems
+      
     
       
   //const connectedUserMediaType = useStore(useUserStore,(state)=>state.userData.userMediaType)  

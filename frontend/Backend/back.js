@@ -59,10 +59,16 @@ app.post('/api/users', async (req,res)=>{ //req: data from client res: what we s
                 const userByEmail = await User.findOne({email: {$eq: data.logInEmail}});
                 return res.json({message: 'get your user by email', user:userByEmail});
             case 'update':
+                console.log(`this is inside update command`)
                 const updatedUser = await User.findByIdAndUpdate( //retrieve info about user
-                    data.userId,
-                    { email:data.newEmail },
-                    { new:true }
+                    data.userId, //the id to search by
+                    {   name:data.signUpName,
+                        email:data.signUpEmail,
+                        userMediaUrl:data.userMediaUrl,
+                        dateOfBirth:data.dateOfBirth,
+                        gender:data.gender,
+                     }, //what we want to update
+                    { new:true } // whether we want the new document or the old one
                     );
             if (!updatedUser){
                 return res.status(404).json({ message:'user not found' });

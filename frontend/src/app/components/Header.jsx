@@ -31,11 +31,11 @@ const Header = () => {
   const handleNavigation = (path, item) => {
     router.push(path)
   }
+  
   const handleSignOut = async()=>{ //close firebase connection
         await signOut(auth)
         alert ("user signed out!")
-        setIsLoggedIn(false)
-        clearStore()
+        setIsLoggingOut(false)
         handleNavigation("/user-login")
         // clearStore()
         // move to login page with link

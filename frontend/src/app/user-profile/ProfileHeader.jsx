@@ -72,7 +72,7 @@ const ProfileHeader = () => {
       const secondCredential = EmailAuthProvider.credential(
       editUserData.newEmail,
       editUserData.currentPassword)
-      await reauthenticateWithCredential(user, secondCredential).then(()=>{
+      await reauthenticateWithCredential(user, credential).then(()=>{
       updatePassword(user, editUserData.newPassword).then(()=>{
         console.log(`password updated successfully in firebase`)
       }).catch((error)=>{

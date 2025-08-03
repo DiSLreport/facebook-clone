@@ -17,8 +17,8 @@ const SignUp = () => { //here to take inspiration from code, doesn't work
             alert ("user registered successfuly") //message to user
         }
         catch (err){
-            console.log("insidesignUp")
-            console.log(err) //print the error to log
+            // console.log("insidesignUp")
+            console.log(`sign up error : ${err}`) //print the error to log
         }
     }
     return(

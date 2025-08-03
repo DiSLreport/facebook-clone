@@ -6,7 +6,7 @@ import FriendRequest from "./FriendRequest";
 import FriendSuggestion from "./FriendSuggestion";
 import useUserStore from "@/store/UserStore";
 const FriendListPage = () => {
-    console.log(JSON.stringify(useUserStore.getState().userId))
+    // console.log(JSON.stringify(useUserStore.getState().userId))
 
     const _id = 1;
     const [loading, setLoading] = useState(false)

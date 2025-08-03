@@ -37,7 +37,7 @@ const NewPostForm = ({ isPostFormOpen, setIsPostFormOpen, handlePostCommand }) =
             //see how to close the window (look for x aria icon)
             }
              catch(err){
-        console.log(err)//print error to log
+        console.log(`error inserting post to database: ${err}`)//print error to log
     }
     console.log("New Post:",postContent)
         }

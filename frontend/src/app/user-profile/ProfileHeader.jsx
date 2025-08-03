@@ -47,7 +47,7 @@ const ProfileHeader = () => {
    });
 
    const handleEditSubmit = async (e) =>{
-    console.log(`Edit data is: ${JSON.stringify(editUserData)}`)
+    // console.log(`Edit data is: ${JSON.stringify(editUserData)}`)
     e.preventDefault();
     if (editUserData.newPassword !== editUserData.confirmNewPassword){
       alert ("Passwords do not match");
@@ -60,7 +60,7 @@ const ProfileHeader = () => {
     editUserData.currentPassword)
       await reauthenticateWithCredential(user, credential).then(()=>{
       updateEmail(user, editUserData.newEmail).then(()=>{
-        console.log(`user email updated successfully`)
+        console.log(`user email updated successfully in firebase`)
       }).catch((error)=>{
         console.log(`error occurred while trying to update email: ${error}`)
         return
@@ -74,7 +74,7 @@ const ProfileHeader = () => {
       editUserData.currentPassword)
       await reauthenticateWithCredential(user, secondCredential).then(()=>{
       updatePassword(user, editUserData.newPassword).then(()=>{
-        console.log(`password updated successfully`)
+        console.log(`password updated successfully in firebase`)
       }).catch((error)=>{
         console.error(`error occurded while trying to update password: ${error}`)
         return
@@ -89,7 +89,7 @@ const ProfileHeader = () => {
       // });
 
       await handleCommand('update');
-      console.log("fill with updating logic")
+      // console.log("fill with updating logic")
   }    catch (err){
         console.log(err)//print error to log
   }
@@ -110,9 +110,9 @@ const ProfileHeader = () => {
     };
 
 const handleCommand = async(command,data = {}) =>{ //probably could copy or import from userloginpage.
-      console.log(`this is the command ${command}, this is the data${data}`)
+      // console.log(`this is the command ${command}, this is the data${data}`)
       try{
-        console.log("inside edit handle command")
+        // console.log("inside edit handle command")
           const response = await axios.post('http://localhost:5000/api/users', { 
                 command,
                 data: {
@@ -129,8 +129,8 @@ const handleCommand = async(command,data = {}) =>{ //probably could copy or impo
             });
             setMessage(response.data.message || 'Operation completed successfully.');
             console.log(JSON.stringify(message))
-            console.log(`response user id is ${response.data.user._id}`);
-            console.log(`response user is ${JSON.stringify(response.data.user)}`);
+            // console.log(`response user id is ${response.data.user._id}`);
+            // console.log(`response user is ${JSON.stringify(response.data.user)}`);
             setUserData(response.data.user._id, response.data.user)
             fetchUsers();
     } catch(error){

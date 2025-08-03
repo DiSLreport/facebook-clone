@@ -11,7 +11,7 @@ import AvatarFacebook from "@/components/ui/avatar-facebook";
 
 
 const PostCard = ({ postId, postText, creatorId, createdAt, updatedAt }) => {
-    console.log(`inside post card, post is: ${JSON.stringify(postText)}`)
+    // console.log(`inside post card, post is: ${JSON.stringify(postText)}`)
     const [isShareDialogOpen, setIsShareDialogOpen] = useState(false)
     const [showComments, setShowComments] = useState(false)
     const date = new Date(createdAt)

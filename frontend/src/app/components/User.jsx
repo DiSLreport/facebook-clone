@@ -59,9 +59,9 @@ function User(){
 
     
 const handleCommand = async (command, data = {}) => {
-    console.log(`this is the command ${command}, this is the data${data}`)
+    // console.log(`this is the command ${command}, this is the data${data}`)
         try {
-          console.log("inside handle command")
+        //   console.log("inside handle command")
             const response = await axios.post('http://localhost:5000/api/users', {
                 command,
                 data: {

@@ -59,14 +59,14 @@ const UserLoginPage = ()=> {
         } catch (error) {
             console.error(error);
             setMessage('Error fetching users: ' + (error.response?.data?.message || error.message));
-            console.log(JSON.stringify(message))
+            // console.log(JSON.stringify(message))
         }
     };
 
   const handleCommand = async (command, data = {}) => {
-    console.log(`this is the command ${command}, this is the data${data}`)
+    // console.log(`this is the command ${command}, this is the data${data}`)
         try {
-          console.log("inside handle command")
+          // console.log("inside handle command")
             const response = await axios.post('http://localhost:5000/api/users', { 
                 command,
                 data: {
@@ -87,11 +87,11 @@ const UserLoginPage = ()=> {
 
             setMessage(response.data.message || 'Operation completed successfully.');
             console.log(JSON.stringify(message))
-            console.log(`response user id is ${response.data.user._id}`);
-            console.log(`response user is ${JSON.stringify(response.data.user)}`);
+            // console.log(`response user id is ${response.data.user._id}`);
+            // console.log(`response user is ${JSON.stringify(response.data.user)}`);
             // setUserId(response.data.user._id)
-            if(command === "insert")
-              console.log(`insert command, response data user id is: ${response.data.user._id}, response data user information is: ${response.data.user}`)
+            // if(command === "insert")
+              // console.log(`insert command, response data user id is: ${response.data.user._id}, response data user information is: ${response.data.user}`)
             setUserData(response.data.user._id, response.data.user)
 //             const useDogStore = create(() => ({ paw: true, snout: true, fur: true }))
 // // Getting non-reactive fresh state
@@ -170,8 +170,8 @@ const UserLoginPage = ()=> {
             alert ("user logged in successfuly") //message to user
             //insert mongo stuff
             await handleCommand('selectByEmail')
-            console.log("this is after handle command, before navigation")
-            console.log(JSON.stringify(useUserStore.getState(userId)))
+            // console.log("this is after handle command, before navigation")
+            // console.log(JSON.stringify(useUserStore.getState(userId)))
             // console.log(userRef)
             handleNavigation("/Homepage")
         }

@@ -12,7 +12,7 @@ function LayoutWrapper({ children }) {
   return (
     // in react we need to wrap everything in <div> or <>, doesn't really matter
     <> 
-      {console.log(hideHeader)}
+      {/* {console.log(hideHeader)} */}
       {!hideHeader && <Header />}
       {children}
     </>

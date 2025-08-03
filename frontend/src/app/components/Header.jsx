@@ -22,7 +22,7 @@ const Header = () => {
   const userId = useStore(useUserStore, (state)=>state.userId)
   if(!userId) return //this might cause handled less hooks than expected
   const userEmail = useUserStore((state) => state.userData.email)
-  console.log(`inside header, user email is ${userEmail} and userId is ${userId} `)
+  // console.log(`inside header, user email is ${userEmail} and userId is ${userId} `)
   ///const userEmail = useUserStore.getState().userData.email
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const { theme, setTheme } = useTheme()

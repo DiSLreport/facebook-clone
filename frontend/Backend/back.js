@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
    userMediaType: String
    //add profile image url
 },{timestamps: true});
-console.log("schema is done");
+// console.log("schema is done");
 
 const User = mongoose.model('User',userSchema);
 
@@ -59,7 +59,7 @@ app.post('/api/users', async (req,res)=>{ //req: data from client res: what we s
                 const userByEmail = await User.findOne({email: {$eq: data.logInEmail}});
                 return res.json({message: 'get your user by email', user:userByEmail});
             case 'update':
-                console.log(`this is inside update command`)
+                // console.log(`this is inside update command`)
                 const updatedUser = await User.findByIdAndUpdate( //retrieve info about user
                     data.userId, //the id to search by
                     {   name:data.signUpName,

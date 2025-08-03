@@ -20,8 +20,9 @@ const AvatarFacebook = ({
       const [displayedUserName, setDisplayedUserName] = useState("");
       const [displayedUserImageUrl, setDisplayedUserImageUrl] = useState("");
       const [isCreated, setIsCreated] = useState(false)
-      console.log(`Inside avatar facebook, post user is: ${JSON.stringify(postUser)}`)
-      console.log(`Inside avatar facebook, post user's media url is: ${JSON.stringify(postUser?.userMediaUrl)}`)
+      
+      // console.log(`Inside avatar facebook, post user is: ${JSON.stringify(postUser)}`)
+      // console.log(`Inside avatar facebook, post user's media url is: ${JSON.stringify(postUser?.userMediaUrl)}`)
       
       const checkWhatUserIsConnected  =  () => {
               switch (userId){
@@ -40,7 +41,7 @@ const AvatarFacebook = ({
               }
             }
 
-      useEffect(() => {
+      useEffect(() => { //need to fix: reloads every re-render instead of just once on component mount, tried useeffect to no avail, for now
         if(!isCreated){
         checkWhatUserIsConnected();
         setIsCreated(true)
@@ -76,7 +77,7 @@ const AvatarFacebook = ({
         </AvatarFallback>
         </Avatar>
         <span className="font-semibold">
-          {console.log(` avatar facebook name: ${displayedUserName}`)}
+          {/* {console.log(` avatar facebook name: ${displayedUserName}`)} */}
         {displayedUserName}
         </span>
         </div>

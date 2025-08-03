@@ -13,7 +13,7 @@ const HomePage = () => {
     const [message,setMessage] = useState("")
     const [posts,setPosts] = useState([])
     const userId = useStore(useUserStore, (state)=>state.userId)
-    console.log(`inside post page js, current userId is: ${JSON.stringify(userId)}`)
+    // console.log(`inside post page js, current userId is: ${JSON.stringify(userId)}`)
 
 useEffect(()=>{
     fetchPosts();
@@ -36,8 +36,8 @@ const fetchPosts = async () => {
 
     const handlePostCommand = async(command,textAreaPostContent,userId, data = {}) => {
             try{
-                console.log(`this is the command ${command}, this is the data ${JSON.stringify(data)}, this is the post content ${JSON.stringify(textAreaPostContent)}`)
-                console.log(`inside handle post, user id is ${userId}`)
+                // console.log(`this is the command ${command}, this is the data ${JSON.stringify(data)}, this is the post content ${JSON.stringify(textAreaPostContent)}`)
+                // console.log(`inside handle post, user id is ${userId}`)
                 const response = await axios.post('http://localhost:5000/api/posts',{
                 command,
                 data:{
@@ -48,8 +48,8 @@ const fetchPosts = async () => {
                 }
                 });
                 setMessage(response.data.message || 'Operation completed successfully.');
-                console.log(`response post id is ${response.data.post._id}`);
-                console.log(`response post is ${response.data.post}`);
+                // console.log(`response post id is ${response.data.post._id}`);
+                // console.log(`response post is ${response.data.post}`);
                 //zustand store actions here maybe?
                 fetchPosts();
                 }
@@ -78,7 +78,7 @@ const fetchPosts = async () => {
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
-            {console.log(`posts in db are: ${JSON.stringify(posts)}`)}
+            {/* {console.log(`posts in db are: ${JSON.stringify(posts)}`)} */}
             <main className="flex flex-1 pt-16">
                 <LeftSideBar />
                 <div className="flex-1 px-4 py-6 md:ml-64 lg:max-w-xl xl:max-w-3xl mx-auto">
